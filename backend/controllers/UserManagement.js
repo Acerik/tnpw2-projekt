@@ -4,7 +4,6 @@ const validator = require('validator');
 const saltRounds = 10;
 
 exports.Registration = async (data, res) => {
-    console.log(data);
     let errors = Array();
     if (data.password !== data.confirmPassword) {
         errors.push("Hesla se neshodují");
@@ -26,7 +25,6 @@ exports.Registration = async (data, res) => {
     let salt = bcrypt.genSaltSync(saltRounds);
     data.password = bcrypt.hashSync(data.password, salt);
     data.confirmPassword = bcrypt.hashSync(data.confirmPassword, salt);
-    //bcrypt.compareSync(pass, hash); //true or false
     //check if username is taken
     UserModel.findOne({username: data.username}).then(findUsername => {
         if(findUsername == null){
@@ -51,6 +49,24 @@ exports.Registration = async (data, res) => {
     });
 }
 
-exports.Login = (data) => {
-    console.log(data);
+exports.Login = (data, res, req) => {
+    let errors = Array();
+    UserModel.findOne({email:data.email}).then(userEmail => {
+        if(userEmail != null){
+            if(bcrypt.compareSync(data.password, userEmail.password)){
+                req.session.userId = userEmail.username;
+                req.session.save();
+                console.log(req.session.userId);
+                delete userEmail.password;
+                delete userEmail.email;
+                res.send(userEmail);
+            } else {
+                errors.push("Zadané heslo je špatné.");
+                res.send(errors);
+            }
+        } else {
+            errors.push("Uživatel s tímto emailem nebyl nalezen.");
+            res.send(errors);
+        }
+    });
 }
