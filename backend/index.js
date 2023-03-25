@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 
 const UserManagement = require('./controllers/UserManagement');
+const AdvertiseManagement = require('./controllers/AdvertiseManagement');
 
 main().catch(err =>console.log(err));
 main().then(res => console.log("MongoDB is connected"));
@@ -52,6 +53,22 @@ app.get('/api/logout', (req, res) => {
         res.send("Uživatel byl odhlášen.");
     } else {
         //not logged
+    }
+});
+
+app.get('/api/logged-in', (req, res) => {
+    if(req.session.userId){
+        res.send(true);
+    } else {
+        res.send(false);
+    }
+});
+
+app.post('/api/add-advertise', (req, res) => {
+    if(req.session.userId){
+        AdvertiseManagement.AddAdvertise(req.session.userId, req.body, res);
+    } else {
+        //not logged in
     }
 });
 

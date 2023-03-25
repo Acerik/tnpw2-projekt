@@ -54,9 +54,8 @@ exports.Login = (data, res, req) => {
     UserModel.findOne({email:data.email}).then(userEmail => {
         if(userEmail != null){
             if(bcrypt.compareSync(data.password, userEmail.password)){
-                req.session.userId = userEmail.username;
+                req.session.userId = userEmail._id.toString();
                 req.session.save();
-                console.log(req.session.userId);
                 delete userEmail.password;
                 delete userEmail.email;
                 res.send(userEmail);

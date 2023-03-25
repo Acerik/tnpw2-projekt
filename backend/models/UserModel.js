@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
-var UserModel = new Schema({
+let UserModel = new Schema({
     username: String,
     password: String,
     email: String,
