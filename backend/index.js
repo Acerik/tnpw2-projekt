@@ -76,6 +76,14 @@ app.get('/api/get-advertise', (req, res) => {
     AdvertiseManagement.GetAdvertiseToShow(req.query.advertiseId, res);
 });
 
+app.get('/api/get-user', (req, res) => {
+    UserManagement.GetUserToShow(req.query.userId, res);
+});
+
+app.get('/api/get-advertises-from-user', (req,res)=>{
+    AdvertiseManagement.GetAdvertisesFromUser(req.query.userId, res);
+});
+
 app.listen(PORT, () => {
     console.log("Server listening on port " + PORT);
 });

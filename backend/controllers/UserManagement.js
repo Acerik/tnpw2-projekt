@@ -69,3 +69,12 @@ exports.Login = (data, res, req) => {
         }
     });
 }
+
+exports.GetUserToShow = (userId, res) => {
+    UserModel.findById(userId).lean().then(user => {
+        delete user["password"];
+        res.send(user);
+    }).catch(err=> {
+        console.log(err);
+    });
+}

@@ -23,3 +23,11 @@ exports.GetAdvertiseToShow = (advertiseId, res) => {
         res.send("ERROR");
     });
 }
+
+exports.GetAdvertisesFromUser = (userId, res) => {
+    AdvertiseModel.find({owner: userId}).lean().then(advertises => {
+        res.send(advertises);
+    }).catch(err => {
+        console.log(err);
+    });
+}

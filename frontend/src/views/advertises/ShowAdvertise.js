@@ -23,7 +23,9 @@ function ShowAdvertise(){
 
     if(firstLoad) {
         setFirstLoad(false);
-        axios.get(BASE_URL + "/get-advertise", {params: {advertiseId}}, AxiosConfig).then(res => {
+        let tempConfig = AxiosConfig;
+        tempConfig.params={advertiseId};
+        axios.get(BASE_URL + "/get-advertise",tempConfig ).then(res => {
             setAdvertiseData(res.data);
         }).catch(err => {
             console.log(err);

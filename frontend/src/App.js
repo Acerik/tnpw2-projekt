@@ -5,9 +5,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Registration from './views/Registration';
 import Login from './views/Login';
 import Navbar from './views/NavbarMenu';
-import MyProfile from "./views/MyProfile";
+import MyProfile from "./views/users/MyProfile";
 import AddAdvertise from "./views/advertises/AddAdvertise";
 import ShowAdvertise from "./views/advertises/ShowAdvertise";
+import ShowUser from "./views/users/ShowUser";
 
 function App() {
     return (
@@ -19,6 +20,7 @@ function App() {
                 <Route path='/muj-profil' element={<MyProfile/>}/>
                 <Route path='/pridat-inzerat' element={<AddAdvertise />}/>
                 <Route path='/inzerat/:advertiseId' element={<ShowAdvertise/>}/>
+                <Route path='/uzivatel/:userId' element={<ShowUser/>}/>
             </Routes>
         </Router>
     );
