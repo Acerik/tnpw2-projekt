@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import React from 'react';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
@@ -7,7 +6,8 @@ import Registration from './views/Registration';
 import Login from './views/Login';
 import Navbar from './views/NavbarMenu';
 import MyProfile from "./views/MyProfile";
-import AddAdvertise from "./views/AddAdvertise";
+import AddAdvertise from "./views/advertises/AddAdvertise";
+import ShowAdvertise from "./views/advertises/ShowAdvertise";
 
 function App() {
     return (
@@ -18,6 +18,7 @@ function App() {
                 <Route path='/prihlaseni' element={<Login/>}/>
                 <Route path='/muj-profil' element={<MyProfile/>}/>
                 <Route path='/pridat-inzerat' element={<AddAdvertise />}/>
+                <Route path='/inzerat/:advertiseId' element={<ShowAdvertise/>}/>
             </Routes>
         </Router>
     );

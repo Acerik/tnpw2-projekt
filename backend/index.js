@@ -72,6 +72,10 @@ app.post('/api/add-advertise', (req, res) => {
     }
 });
 
+app.get('/api/get-advertise', (req, res) => {
+    AdvertiseManagement.GetAdvertiseToShow(req.query.advertiseId, res);
+});
+
 app.listen(PORT, () => {
     console.log("Server listening on port " + PORT);
 });

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {BASE_URL, AxiosConfig} from "../AxiosConfig";
+import {BASE_URL, AxiosConfig} from "../../AxiosConfig";
 import React, {useState} from 'react';
 import {Form, Button, Alert, InputGroup} from 'react-bootstrap';
 
@@ -22,8 +22,7 @@ function AddAdvertise() {
     function onSubmit(e) {
         e.preventDefault();
         if(advertiseState.price !== null && advertiseState.name !== null && advertiseState.description !== ""){
-            axios.post(BASE_URL + "/add-advertise", JSON.stringify(advertiseState), AxiosConfig).
-            then(res => {
+            axios.post(BASE_URL + "/add-advertise", JSON.stringify(advertiseState), AxiosConfig).then(res => {
                 console.log(res);
             }).catch(err => {
                 console.log(err);
