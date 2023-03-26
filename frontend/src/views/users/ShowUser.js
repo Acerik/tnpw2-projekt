@@ -13,7 +13,15 @@ function ShowUser(){
         username: "",
         email: ""
     });
-    const [userAdvertises, setUserAdvertises] = useState(Array());
+    const [userAdvertises, setUserAdvertises] = useState([{
+        _id: "",
+        name: "",
+        price: "",
+        description: "",
+        priceType: "",
+        type: "",
+        owner: ""
+    }]);
 
     if(firstLoad){
         setFirstLoad(false);

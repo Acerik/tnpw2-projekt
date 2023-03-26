@@ -15,7 +15,6 @@ exports.GetAdvertiseToShow = (advertiseId, res) => {
     AdvertiseModel.findById(advertiseId).lean().then((advertiseFind) => {
         UserModel.findById(advertiseFind.owner).lean().then(userFind => {
             advertiseFind.ownerName = userFind.username;
-            console.log(advertiseFind);
             res.send(advertiseFind);
         });
     }).catch(err=>{
