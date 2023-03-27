@@ -1,13 +1,14 @@
 import axios from 'axios';
-import {BASE_URL, AxiosConfig} from "../AxiosConfig";
+import {BASE_URL, AxiosConfig} from "../components/AxiosConfig";
 import React, {useState} from 'react';
 import {Form, Button, Alert} from 'react-bootstrap';
 import {useNavigate} from "react-router-dom";
+import {useCookies} from "react-cookie";
 
 function Login() {
 
     const navigate = useNavigate();
-
+    const [cookies, setCookie, removeCookie] = useCookies('userId');
     const [loginState, setLoginState] = useState({
         email: "",
         password: ""
@@ -19,13 +20,14 @@ function Login() {
         e.preventDefault();
         axios.post(BASE_URL + "/login", JSON.stringify(loginState), AxiosConfig)
             .then(res => {
-                console.log(res);
                 if(Array.isArray(res.data)){
                     let element = document.getElementById("errors-p");
                     element.innerHTML = res.data.join("<br>");
                     setHiddenError(false);
                 } else {
-                    navigate("/muj-profil");
+                    setCookie('userId', res.data._id, {path: '/'});
+                    navigate("/uzivatel/" + res.data._id);
+                    navigate(0);
                 }
             })
             .catch(err => {

@@ -58,7 +58,10 @@ app.get('/api/logout', (req, res) => {
 
 app.get('/api/logged-in', (req, res) => {
     if(req.session.userId){
-        res.send(true);
+        res.send({
+            logged: true,
+            userId: req.session.userId
+        });
     } else {
         res.send(false);
     }

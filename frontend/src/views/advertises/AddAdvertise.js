@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {BASE_URL, AxiosConfig} from "../../AxiosConfig";
+import {BASE_URL, AxiosConfig} from "../../components/AxiosConfig";
 import React, {useState} from 'react';
 import {Form, Button, Alert, InputGroup} from 'react-bootstrap';
 
@@ -75,7 +75,7 @@ function AddAdvertise() {
     }
 
     function changeAdType(e) {
-        if (advertiseState.type === "buy") {
+        if (advertiseState.type !== "buy") {
             setFormDisabledState({
                 priceValue: true,
                 priceType: true

@@ -1,13 +1,15 @@
 import axios from 'axios';
-import {BASE_URL, AxiosConfig} from "../../AxiosConfig";
+import {BASE_URL, AxiosConfig} from "../../components/AxiosConfig";
 import React, {useState} from 'react';
 import {Card} from 'react-bootstrap';
 import {useParams} from "react-router";
+import {useCookies} from "react-cookie";
 
 function ShowUser(){
     const userId = useParams().userId;
     const priceTypes = {"free":"Zdarma", "offer":"Dohodou"};
     const advertiseTypes = {"buy":"Koupím", "sell":"Prodám"};
+    const [cookies, setCookie] = useCookies('userId');
     const [firstLoad, setFirstLoad] = useState(true);
     const [userData, setUserData] = useState({
         username: "",
@@ -45,6 +47,7 @@ function ShowUser(){
         <>
             <Card>
                 <Card.Body>
+                    {cookies.userId !== undefined ? <Card.Title> Můj profil</Card.Title> : cookies.userId}
                     <Card.Title>{userData.username}</Card.Title>
                     <Card.Text>Email: {userData.email}</Card.Text>
                 </Card.Body>
