@@ -30,3 +30,21 @@ exports.GetAdvertisesFromUser = (userId, res) => {
         console.log(err);
     });
 }
+
+exports.DeleteAdvertise = (data, res) => {
+    AdvertiseModel.findById(data.advertiseId).lean().then(advertise => {
+        if(data.userId === advertise.owner){
+            AdvertiseModel.findByIdAndRemove(data.advertiseId).then(deletedAdvertise => {
+                res.send("Inzerát s názvem: \"" + deletedAdvertise.name + "\" byl smazán.");
+            }).catch(err => {
+                console.log(err);
+                res.send(Array["Chyba při mazání inzerátu."]);
+            });
+        } else {
+            res.send(Array(["Uživatel není autorem inzerátu. Inzerát s názvem: "+ advertise.name]));
+        }
+    }).catch(err => {
+        console.log(err);
+        res.send(Array(["Inzerát nebyl nalezen."]));
+    });
+};

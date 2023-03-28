@@ -79,6 +79,15 @@ app.get('/api/get-advertise', (req, res) => {
     AdvertiseManagement.GetAdvertiseToShow(req.query.advertiseId, res);
 });
 
+app.delete('/api/delete-advertise', (req, res) => {
+    if(req.session.userId){
+        let data = {userId: req.session.userId, advertiseId: req.query.advertiseIdToDelete};
+        AdvertiseManagement.DeleteAdvertise(data, res);
+    } else {
+        //not logged in
+    }
+});
+
 app.get('/api/get-user', (req, res) => {
     UserManagement.GetUserToShow(req.query.userId, res);
 });
