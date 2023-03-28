@@ -39,7 +39,9 @@ function ShowAdvertise(){
                 <Card.Body>
                     <Card.Title>{advertiseData.name}</Card.Title>
                     <Card.Text>{advertiseData.description}</Card.Text>
-                    <Card.Subtitle>{advertiseData.priceType === "price" ? (advertiseData.price + " Kč") : priceTypes[advertiseData.priceType]}</Card.Subtitle>
+                    {advertiseData.type === "sell" ?
+                        <Card.Subtitle>{advertiseData.priceType === "price" ? (advertiseData.price + " Kč") : priceTypes[advertiseData.priceType]}</Card.Subtitle>
+                    : ""}
                     <Card.Subtitle>Uživalel: <Card.Link href={"/uzivatel/"+advertiseData.owner}>{advertiseData.ownerName}</Card.Link></Card.Subtitle>
                 </Card.Body>
             </Card>

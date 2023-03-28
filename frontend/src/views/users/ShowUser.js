@@ -47,7 +47,7 @@ function ShowUser(){
         <>
             <Card>
                 <Card.Body>
-                    {cookies.userId !== undefined ? <Card.Title> Můj profil</Card.Title> : cookies.userId}
+                    {cookies.userId.length > 9 ? <Card.Title> Můj profil</Card.Title> : ""}
                     <Card.Title>{userData.username}</Card.Title>
                     <Card.Text>Email: {userData.email}</Card.Text>
                 </Card.Body>
@@ -58,7 +58,9 @@ function ShowUser(){
                           <Card.Title><Card.Link href={"/inzerat/"+ advertise._id}>{advertise.name}</Card.Link></Card.Title>
                           <Card.Text>{advertise.description.substring(0,200)}</Card.Text>
                           <Card.Text>{advertiseTypes[advertise.type]}</Card.Text>
+                          {advertise.type === "sell" ?
                           <Card.Subtitle>{advertise.priceType === "price" ? ("Cena: " + advertise.price + " Kč") : priceTypes[advertise.priceType]}</Card.Subtitle>
+                              : ""}
                       </Card.Body>
                     );
                 })}
