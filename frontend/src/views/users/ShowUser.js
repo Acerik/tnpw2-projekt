@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {BASE_URL, AxiosConfig} from "../../components/AxiosConfig";
 import React, {useState} from 'react';
-import {Alert, Card, Toast, ToastContainer} from 'react-bootstrap';
+import {Alert, Card} from 'react-bootstrap';
 import {useParams} from "react-router";
 import {useCookies} from "react-cookie";
 
@@ -9,7 +9,7 @@ function ShowUser() {
     const userId = useParams().userId;
     const priceTypes = {"free": "Zdarma", "offer": "Dohodou"};
     const advertiseTypes = {"buy": "Koupím", "sell": "Prodám"};
-    const [cookies, setCookie] = useCookies('userId');
+    const [cookies] = useCookies('userId');
     const [myProfile, setMyProfile] = useState(false);
     const [firstLoad, setFirstLoad] = useState(true);
     const [hiddenError, setHiddenError] = useState(true);

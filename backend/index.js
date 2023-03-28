@@ -53,6 +53,7 @@ app.get('/api/logout', (req, res) => {
         res.send("Uživatel byl odhlášen.");
     } else {
         //not logged
+        res.send(["Uživatel není přihlášen. Pro tento krok, je nutné se první přihlásit."]);
     }
 });
 
@@ -72,11 +73,30 @@ app.post('/api/add-advertise', (req, res) => {
         AdvertiseManagement.AddAdvertise(req.session.userId, req.body, res);
     } else {
         //not logged in
+        res.send(["Uživatel není přihlášen. Pro tento krok, je nutné se první přihlásit."]);
     }
 });
 
 app.get('/api/get-advertise', (req, res) => {
     AdvertiseManagement.GetAdvertiseToShow(req.query.advertiseId, res);
+});
+
+app.get('/api/edit-advertise', (req, res) => {
+    if(req.session.userId){
+        AdvertiseManagement.GetAdvertiseEdit({advertiseId: req.query.advertiseId, userId: req.session.userId}, res);
+    } else {
+        // not logged in
+        res.send(["Uživatel není přihlášen. Pro tento krok, je nutné se první přihlásit."]);
+    }
+});
+
+app.put('/api/edit-advertise', (req, res) => {
+    if(req.session.userId){
+        AdvertiseManagement.EditAdvertise(req.session.userId, req.body, res);
+    } else {
+        // not logged in
+        res.send(["Uživatel není přihlášen. Pro tento krok, je nutné se první přihlásit."]);
+    }
 });
 
 app.delete('/api/delete-advertise', (req, res) => {
@@ -85,6 +105,7 @@ app.delete('/api/delete-advertise', (req, res) => {
         AdvertiseManagement.DeleteAdvertise(data, res);
     } else {
         //not logged in
+        res.send(["Uživatel není přihlášen. Pro tento krok, je nutné se první přihlásit."]);
     }
 });
 

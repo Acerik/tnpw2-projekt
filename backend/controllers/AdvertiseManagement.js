@@ -17,9 +17,36 @@ exports.GetAdvertiseToShow = (advertiseId, res) => {
             advertiseFind.ownerName = userFind.username;
             res.send(advertiseFind);
         });
-    }).catch(err=>{
+    }).catch(err => {
         console.log(err);
         res.send("ERROR");
+    });
+}
+
+exports.GetAdvertiseEdit = (data, res) => {
+    AdvertiseModel.findById(data.advertiseId).then(advertiseFind => {
+        if (data.userId === advertiseFind.owner) {
+            res.send(advertiseFind);
+        } else {
+            //not own the advertise
+            res.send(["Nejste autorem tohoto inzerátu."]);
+        }
+    }).catch(err => {
+        console.log(err);
+    });
+}
+
+exports.EditAdvertise = (userId, data, res) => {
+    AdvertiseModel.findById(data._id).then(advertiseFind => {
+        if(advertiseFind.owner === userId){
+            AdvertiseModel.findByIdAndUpdate(data._id,data).then(updateResult => {
+                res.send("Inzerát byl upraven.");
+            });
+        } else {
+            res.send(["Uživatel autorem inzerátu, úprava tedy není možná"]);
+        }
+    }).catch(err => {
+        console.log(err);
     });
 }
 
@@ -33,7 +60,7 @@ exports.GetAdvertisesFromUser = (userId, res) => {
 
 exports.DeleteAdvertise = (data, res) => {
     AdvertiseModel.findById(data.advertiseId).lean().then(advertise => {
-        if(data.userId === advertise.owner){
+        if (data.userId === advertise.owner) {
             AdvertiseModel.findByIdAndRemove(data.advertiseId).then(deletedAdvertise => {
                 res.send("Inzerát s názvem: \"" + deletedAdvertise.name + "\" byl smazán.");
             }).catch(err => {
@@ -41,7 +68,7 @@ exports.DeleteAdvertise = (data, res) => {
                 res.send(Array["Chyba při mazání inzerátu."]);
             });
         } else {
-            res.send(Array(["Uživatel není autorem inzerátu. Inzerát s názvem: "+ advertise.name]));
+            res.send(Array(["Uživatel není autorem inzerátu. Inzerát s názvem: " + advertise.name]));
         }
     }).catch(err => {
         console.log(err);
