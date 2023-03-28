@@ -3,10 +3,12 @@ import {Navbar, Container, Nav} from 'react-bootstrap';
 import axios from 'axios';
 import {BASE_URL, AxiosConfig} from "../components/AxiosConfig";
 import {useCookies} from 'react-cookie';
+import {useNavigate} from "react-router-dom";
 
 
 function NavbarMenu() {
 
+    const navigate = useNavigate();
     const [cookies, setCookie, removeCookie] = useCookies('userId');
     const [currentUser, setCurrentUser] = useState({
         loading: true,
@@ -21,14 +23,7 @@ function NavbarMenu() {
         axios.get(BASE_URL + "/logout", AxiosConfig).then(res => {
             alert(res.data);
             removeCookie('userId',{path: '/'});
-            setCurrentUser({
-                loading: false,
-                data: {
-                    logged: false,
-                    userId: ""
-                },
-                firstLoad: false
-            });
+            navigate(0);
         }).catch(err => {
             console.log(err);
         });

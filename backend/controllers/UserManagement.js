@@ -32,7 +32,6 @@ exports.Registration = async (data, res) => {
                 if(findEmail == null) {
                     const userToSave = new UserModel(data);
                     userToSave.save().then(() => {
-                            console.log("success");
                             res.send("ok");
                     }).catch((err) => {
                         console.log(err);

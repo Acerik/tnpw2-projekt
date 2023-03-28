@@ -39,7 +39,6 @@ app.post('/api/registration', (req, res) => {
 });
 
 app.post('/api/login', (req, res) => {
-    console.log(req.session.userId);
     if(req.session.userId){
         res.send(Array("Uživatel je již přihlášen."));
     } else {
