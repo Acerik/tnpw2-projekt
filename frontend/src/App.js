@@ -8,18 +8,28 @@ import Navbar from './views/NavbarMenu';
 import AdvertiseEditor from "./views/advertises/AdvertiseEditor";
 import ShowAdvertise from "./views/advertises/ShowAdvertise";
 import ShowUser from "./views/users/ShowUser";
+import {ProtectedRoute} from "./components/ProtectedRoute";
+import {useCookies} from "react-cookie";
 
 function App() {
+    const [cookies] = useCookies('userId');
+
     return (
         <Router>
             <Navbar/>
             <Routes>
-                <Route path='/registrace' element={<Registration/>}/>
-                <Route path='/prihlaseni' element={<Login/>}/>
-                <Route path='/pridat-inzerat' element={<AdvertiseEditor />}/>
                 <Route path='/inzerat/:advertiseId' element={<ShowAdvertise/>}/>
                 <Route path='/uzivatel/:userId' element={<ShowUser/>}/>
-                <Route path='/upravit-inzerat/:advertiseId' element={<AdvertiseEditor/>}/>
+
+                <Route path='/pridat-inzerat' element={
+                    <ProtectedRoute childrenRoute={<AdvertiseEditor/>} mustBeLogged={true} alternativePath="/prihlaseni"/>}/>
+                <Route path='/upravit-inzerat/:advertiseId' element={
+                    <ProtectedRoute childrenRoute={<AdvertiseEditor/>} mustBeLogged={true} alternativePath="/prihlaseni"/>}/>
+
+                <Route path='/prihlaseni' element={
+                    <ProtectedRoute childrenRoute={<Login/>} mustBeLogged={false} alternativePath={"/uzivatel/" + cookies.userId}/>}/>
+                <Route path='/registrace' element={
+                    <ProtectedRoute childrenRoute={<Registration/>} mustBeLogged={false} alternativePath={"/uzivatel/" + cookies.userId}/>}/>
             </Routes>
         </Router>
     );

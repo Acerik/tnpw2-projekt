@@ -35,13 +35,11 @@ function ShowUser() {
         axios.get(BASE_URL + '/get-user', tempConfig).then(res => {
             setUserData(res.data);
             setMyProfile(cookies.userId === res.data._id);
-            console.log(res);
         }).catch(err => {
             console.log(err);
         });
         axios.get(BASE_URL + '/get-advertises-from-user', tempConfig).then(res => {
             setUserAdvertises(res.data);
-            console.log(res)
         }).catch(err => {
             console.log(err);
         });
@@ -82,7 +80,7 @@ function ShowUser() {
                 <Alert.Heading>Chyba</Alert.Heading>
                 <p id="errors-p"> </p>
             </Alert>
-            <Alert hidden={hiddenSuccess} variant="success" onClose={()=> setHiddenSuccess(true)} dismissible delay={3000} autohide>
+            <Alert hidden={hiddenSuccess} variant="success" onClose={()=> setHiddenSuccess(true)} dismissible>
                 <Alert.Heading>Úspěch</Alert.Heading>
                 <p id="success-p"> </p>
             </Alert>
@@ -96,8 +94,8 @@ function ShowUser() {
             </Card>
             {userAdvertises.map(advertise => {
                 return (
-                    <Card>
-                        <Card.Body key={advertise._id}>
+                    <Card key={advertise._id}>
+                        <Card.Body>
                             <Card.Title>
                                 <Card.Link href={"/inzerat/" + advertise._id}>{advertise.name}</Card.Link>
                             </Card.Title>

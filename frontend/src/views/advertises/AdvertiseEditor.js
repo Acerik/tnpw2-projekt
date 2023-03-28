@@ -73,7 +73,6 @@ function AdvertiseEditor() {
         } else { // creating
             if (advertiseState.price !== null && advertiseState.name !== null && advertiseState.description !== "") {
                 axios.post(BASE_URL + "/add-advertise", JSON.stringify(advertiseState), AxiosConfig).then(res => {
-                    console.log(res);
                     if(Array.isArray(res)){
                         let element = document.getElementById("errors-p");
                         element.innerHTML = res.data.join("<br>");
@@ -141,7 +140,6 @@ function AdvertiseEditor() {
                 priceType: true
             });
         } else {
-            console.log(advertiseState.priceType);
             setFormDisabledState({
                 priceValue: advertiseState.priceType !== "price",
                 priceType: false
