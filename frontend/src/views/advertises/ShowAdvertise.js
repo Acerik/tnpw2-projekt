@@ -3,6 +3,7 @@ import {BASE_URL, AxiosConfig} from "../../components/AxiosConfig";
 import React, {useState} from 'react';
 import {Card} from 'react-bootstrap';
 import {useParams} from "react-router";
+import moment from "moment";
 
 function ShowAdvertise(){
 
@@ -15,6 +16,8 @@ function ShowAdvertise(){
         description: "",
         priceType: "",
         type: "",
+        createdOn: "",
+        lastUpdate: "",
         owner: "",
         ownerName:""
     });
@@ -27,9 +30,14 @@ function ShowAdvertise(){
         tempConfig.params={advertiseId};
         axios.get(BASE_URL + "/get-advertise",tempConfig ).then(res => {
             setAdvertiseData(res.data);
+            console.log(res.data);
         }).catch(err => {
             console.log(err);
         });
+    }
+
+    function formatDate(date){
+        return moment(date).format("DD.MM.YYYY HH:mm:ss");
     }
 
     return (
@@ -42,8 +50,12 @@ function ShowAdvertise(){
                     {advertiseData.type === "sell" ?
                         <Card.Subtitle>{advertiseData.priceType === "price" ? (advertiseData.price + " Kč") : priceTypes[advertiseData.priceType]}</Card.Subtitle>
                     : ""}
-                    <Card.Subtitle>Uživalel: <Card.Link href={"/uzivatel/"+advertiseData.owner}>{advertiseData.ownerName}</Card.Link></Card.Subtitle>
+                    <Card.Subtitle>Uživatel: <Card.Link href={"/uzivatel/"+advertiseData.owner}>{advertiseData.ownerName}</Card.Link></Card.Subtitle>
                 </Card.Body>
+                    <Card.Footer className="text-muted">Přidáno: {formatDate(advertiseData.createdOn)}</Card.Footer>
+                    {advertiseData.createdOn === advertiseData.lastUpdate ? null :
+                        <Card.Footer className="text-muted" >Poslední úprava: {formatDate(advertiseData.lastUpdate)}</Card.Footer>
+                    }
             </Card>
         </>
     );

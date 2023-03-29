@@ -108,6 +108,10 @@ app.delete('/api/delete-advertise', (req, res) => {
     }
 });
 
+app.get('/api/get-advertise-list', (req, res) => {
+    AdvertiseManagement.GetAdvertiseList(req.query.page, res);
+});
+
 app.get('/api/get-user', (req, res) => {
     UserManagement.GetUserToShow(req.query.userId, res);
 });

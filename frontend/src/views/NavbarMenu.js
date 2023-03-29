@@ -53,7 +53,7 @@ function NavbarMenu() {
                 <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto">
-                        <Nav.Link href="#">ODKAZ</Nav.Link>
+                        <Nav.Link href="/inzeraty/">Inzeráty</Nav.Link>
                     </Nav>
                     {!currentUser.data.logged ? (
                         <Nav>

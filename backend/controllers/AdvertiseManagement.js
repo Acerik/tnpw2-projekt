@@ -4,6 +4,9 @@ const UserModel = require('../models/UserModel');
 exports.AddAdvertise = (userId, data, res) => {
     const advertiseToAdd = new AdvertiseModel(data);
     advertiseToAdd.owner = userId;
+    let now = Date.now();
+    advertiseToAdd.createdOn = now;
+    advertiseToAdd.lastUpdate = now;
     advertiseToAdd.save().then(() => {
         res.send("Uloženo");
     }).catch(err => {
@@ -38,8 +41,9 @@ exports.GetAdvertiseEdit = (data, res) => {
 
 exports.EditAdvertise = (userId, data, res) => {
     AdvertiseModel.findById(data._id).then(advertiseFind => {
-        if(advertiseFind.owner === userId){
-            AdvertiseModel.findByIdAndUpdate(data._id,data).then(updateResult => {
+        if (advertiseFind.owner === userId) {
+            data.lastUpdate = Date.now();
+            AdvertiseModel.findByIdAndUpdate(data._id, data).then(updateResult => {
                 res.send("Inzerát byl upraven.");
             });
         } else {
@@ -53,6 +57,27 @@ exports.EditAdvertise = (userId, data, res) => {
 exports.GetAdvertisesFromUser = (userId, res) => {
     AdvertiseModel.find({owner: userId}).lean().then(advertises => {
         res.send(advertises);
+    }).catch(err => {
+        console.log(err);
+    });
+}
+
+exports.GetAdvertiseList = (page, res) => {
+    const perPage = 20;
+    if (!page || page < 1) {
+        page = 1;
+    }
+    AdvertiseModel.countDocuments().then(numberOfDocuments => {
+        let maxPage = Math.ceil(numberOfDocuments / perPage);
+        if (page > maxPage) {
+            page = maxPage;
+        }
+        let skip = perPage * (page - 1);
+        AdvertiseModel.find().skip(skip).limit(perPage).lean().then(advertises => {
+            res.send({advertises, page, maxPage});
+        }).catch(err => {
+            console.log(err);
+        });
     }).catch(err => {
         console.log(err);
     });

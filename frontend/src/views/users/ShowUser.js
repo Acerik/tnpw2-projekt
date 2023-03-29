@@ -4,6 +4,7 @@ import React, {useState} from 'react';
 import {Alert, Card} from 'react-bootstrap';
 import {useParams} from "react-router";
 import {useCookies} from "react-cookie";
+import moment from "moment";
 
 function ShowUser() {
     const userId = useParams().userId;
@@ -25,6 +26,8 @@ function ShowUser() {
         description: "",
         priceType: "",
         type: "",
+        createdOn: "",
+        lastUpdate: "",
         owner: ""
     }]);
 
@@ -74,6 +77,10 @@ function ShowUser() {
         }
     }
 
+    function formatDate(date){
+        return moment(date).format("DD.MM.YYYY HH:mm:ss");
+    }
+
     return (
         <>
             <Alert hidden={hiddenError} variant="danger" onClose={() => setHiddenError(true)} dismissible>
@@ -110,6 +117,10 @@ function ShowUser() {
                                 </>
                                 : ""}
                         </Card.Body>
+                        <Card.Footer className="text-muted">Přidáno: {formatDate(advertise.createdOn)}</Card.Footer>
+                        {advertise.createdOn === advertise.lastUpdate ? null :
+                            <Card.Footer className="text-muted" >Poslední úprava: {formatDate(advertise.lastUpdate)}</Card.Footer>
+                        }
                     </Card>
                 );
             })}

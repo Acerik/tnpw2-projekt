@@ -7,6 +7,8 @@ let AdvertiseModel = new Schema({
     priceType: String,
     description: String,
     type: String,
+    createdOn: Date,
+    lastUpdate: Date,
     owner: String,
     id: String
 });

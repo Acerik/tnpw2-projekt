@@ -10,6 +10,7 @@ import ShowAdvertise from "./views/advertises/ShowAdvertise";
 import ShowUser from "./views/users/ShowUser";
 import {ProtectedRoute} from "./components/ProtectedRoute";
 import {useCookies} from "react-cookie";
+import ListAdvertises from "./views/advertises/ListAdvertises";
 
 function App() {
     const [cookies] = useCookies('userId');
@@ -18,6 +19,9 @@ function App() {
         <Router>
             <Navbar/>
             <Routes>
+                <Route path='/inzeraty/:page' element={<ListAdvertises/>}/>
+                <Route path='/inzeraty/' element={<ListAdvertises/>}/>
+
                 <Route path='/inzerat/:advertiseId' element={<ShowAdvertise/>}/>
                 <Route path='/uzivatel/:userId' element={<ShowUser/>}/>
 

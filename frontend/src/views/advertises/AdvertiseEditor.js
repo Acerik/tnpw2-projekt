@@ -58,7 +58,7 @@ function AdvertiseEditor() {
         if (advertiseId) { // editing
             advertiseState._id = advertiseId;
             axios.put(BASE_URL + '/edit-advertise', advertiseState, AxiosConfig).then(res => {
-                if(!Array.isArray(res)){
+                if(Array.isArray(res)){
                     let element = document.getElementById("errors-p");
                     element.innerHTML = res.data.join("<br>");
                     setHiddenError(false);
