@@ -30,7 +30,6 @@ function ShowAdvertise(){
         tempConfig.params={advertiseId};
         axios.get(BASE_URL + "/get-advertise",tempConfig ).then(res => {
             setAdvertiseData(res.data);
-            console.log(res.data);
         }).catch(err => {
             console.log(err);
         });

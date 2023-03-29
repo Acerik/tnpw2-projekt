@@ -30,6 +30,7 @@ exports.Registration = async (data, res) => {
         if(findUsername == null){
             UserModel.findOne({email: data.email}).then(findEmail => {
                 if(findEmail == null) {
+                    data.createdOn = Date.now();
                     const userToSave = new UserModel(data);
                     userToSave.save().then(() => {
                             res.send("ok");
@@ -69,7 +70,7 @@ exports.Login = (data, res, req) => {
     });
 }
 
-exports.GetUserToShow = (userId, res) => {
+exports.GetUser = (userId, res) => {
     UserModel.findById(userId).lean().then(user => {
         delete user["password"];
         res.send(user);

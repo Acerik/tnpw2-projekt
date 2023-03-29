@@ -16,9 +16,16 @@ function ShowUser() {
     const [hiddenError, setHiddenError] = useState(true);
     const [hiddenSuccess, setHiddenSuccess] = useState(true);
     const [userData, setUserData] = useState({
+        email: "",
         username: "",
-        email: ""
-    });
+        phoneNumber: "",
+        firstName: "",
+        lastName: "",
+        createdOn: "",
+        address: {
+            zipCode: "",
+            city: ""
+        }});
     const [userAdvertises, setUserAdvertises] = useState([{
         _id: "",
         name: "",
@@ -81,6 +88,7 @@ function ShowUser() {
         return moment(date).format("DD.MM.YYYY HH:mm:ss");
     }
 
+    console.log(myProfile);
     return (
         <>
             <Alert hidden={hiddenError} variant="danger" onClose={() => setHiddenError(true)} dismissible>
@@ -95,10 +103,23 @@ function ShowUser() {
                 <Card.Body>
                     {myProfile ? <Card.Title> Můj profil</Card.Title> : ""}
                     <Card.Title>{userData.username}</Card.Title>
+                    {userData.firstName || userData.lastName ?
+                    <Card.Text>Jméno: {userData.firstName} {userData.lastName}</Card.Text> : ""}
                     <Card.Text>Email: {userData.email}</Card.Text>
+                    {userData.phoneNumber ?
+                    <Card.Text>Telefonní číslo: {userData.phoneNumber}</Card.Text> : "" }
+                    {userData.address ?
+                    <Card.Text>Obec: {userData.address.city}, {userData.address.zipCode}</Card.Text> : ""}
+                    {userData.createdOn ?
+                    <Card.Text>Registrován: {formatDate(userData.createdOn)}</Card.Text> : ""}
+                    {myProfile ?
+                        <Card.Link href='/upravit-profil'>Upravit profil</Card.Link>
+                    : ""}
                 </Card.Body>
-                <Card.Header as="h5">Inzeráty</Card.Header>
             </Card>
+            <Card>
+            <Card.Header as="h5">Inzeráty</Card.Header>
+                <Card.Body>
             {userAdvertises.map(advertise => {
                 return (
                     <Card key={advertise._id}>
@@ -124,6 +145,8 @@ function ShowUser() {
                     </Card>
                 );
             })}
+                </Card.Body>
+            </Card>
         </>
     );
 }

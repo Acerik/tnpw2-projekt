@@ -5,6 +5,14 @@ let UserModel = new Schema({
     username: String,
     password: String,
     email: String,
+    createdOn: Date,
+    firstName: String,
+    lastName: String,
+    phoneNumber: String,
+    address: {
+        zipCode: String,
+        city: String
+    },
     id: String
 });
 

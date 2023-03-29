@@ -11,6 +11,7 @@ import ShowUser from "./views/users/ShowUser";
 import {ProtectedRoute} from "./components/ProtectedRoute";
 import {useCookies} from "react-cookie";
 import ListAdvertises from "./views/advertises/ListAdvertises";
+import EditUser from "./views/users/EditUser";
 
 function App() {
     const [cookies] = useCookies('userId');
@@ -29,6 +30,8 @@ function App() {
                     <ProtectedRoute childrenRoute={<AdvertiseEditor/>} mustBeLogged={true} alternativePath="/prihlaseni"/>}/>
                 <Route path='/upravit-inzerat/:advertiseId' element={
                     <ProtectedRoute childrenRoute={<AdvertiseEditor/>} mustBeLogged={true} alternativePath="/prihlaseni"/>}/>
+                <Route path='/upravit-profil' element={
+                    <ProtectedRoute childrenRoute={<EditUser/>} mustBeLogged={true} alternativePath={'/prihlaseni'}/>}/>
 
                 <Route path='/prihlaseni' element={
                     <ProtectedRoute childrenRoute={<Login/>} mustBeLogged={false} alternativePath={"/uzivatel/" + cookies.userId}/>}/>

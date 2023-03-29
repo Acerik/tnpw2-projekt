@@ -67,6 +67,15 @@ app.get('/api/logged-in', (req, res) => {
     }
 });
 
+app.get('/api/edit-user', (req, res) => {
+    if(req.session.userId){
+        UserManagement.GetUserEdit(req.session.userId, res);
+    } else {
+        // not logged in
+        res.send(["Uživatel není přihlášen. Pro tento krok, je nutné se první přihlásit."]);
+    }
+});
+
 app.post('/api/add-advertise', (req, res) => {
     if(req.session.userId){
         AdvertiseManagement.AddAdvertise(req.session.userId, req.body, res);
@@ -113,7 +122,7 @@ app.get('/api/get-advertise-list', (req, res) => {
 });
 
 app.get('/api/get-user', (req, res) => {
-    UserManagement.GetUserToShow(req.query.userId, res);
+    UserManagement.GetUser(req.query.userId, res);
 });
 
 app.get('/api/get-advertises-from-user', (req,res)=>{
