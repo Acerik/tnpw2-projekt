@@ -69,7 +69,18 @@ app.get('/api/logged-in', (req, res) => {
 
 app.get('/api/edit-user', (req, res) => {
     if(req.session.userId){
-        UserManagement.GetUserEdit(req.session.userId, res);
+        UserManagement.GetUser(req.session.userId, res);
+    } else {
+        // not logged in
+        res.send(["Uživatel není přihlášen. Pro tento krok, je nutné se první přihlásit."]);
+    }
+});
+
+app.put('/api/edit-user', (req, res) => {
+    if(req.session.userId) {
+        let data = req.body;
+        data._id = req.session.userId;
+        UserManagement.EditUser(data, res);
     } else {
         // not logged in
         res.send(["Uživatel není přihlášen. Pro tento krok, je nutné se první přihlásit."]);

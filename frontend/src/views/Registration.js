@@ -61,8 +61,8 @@ function Registration() {
             firstName: "",
             lastName: "",
             address: {
-                zipCode: "",
-                city: ""
+                zipCode: regState.address.zipCode,
+                city: regState.address.city
             }};
         for(const [key, currValue] of Object.entries(regState)){
             if(key === name && currValue instanceof Object){

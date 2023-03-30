@@ -78,3 +78,37 @@ exports.GetUser = (userId, res) => {
         console.log(err);
     });
 }
+
+exports.EditUser = async (data, res) => {
+    UserModel.findById(data._id).lean().then(async currentUserDb => {
+        // check changes
+        // if mail changes => check usage
+        if (data.email !== currentUserDb.email) {
+            let emailUsageUser = await UserModel.findOne({email: data.email}).then(r => {return r;});
+            if(emailUsageUser){
+                res.send(["Email je již použit."]);
+                return null;
+            }
+        }
+        // if password change => passwordOld with current password same check, new password check with confirmPassword
+        if(data.password.length > 1 && data.confirmPassword) {
+            if (data.password === data.confirmPassword) {
+                if (!bcrypt.compareSync(data.oldPassword, currentUserDb.password)) {
+                    res.send(["Staré heslo není správné."]);
+                    return null;
+                }
+            } else {
+                res.send(["Nová hesla se nerovnají."]);
+                return null;
+            }
+        }
+        // do update
+        UserModel.findByIdAndUpdate(data._id, data).then(updatedUser => {
+            res.send("Úprava byla provedena.");
+        }).catch(err => {
+            console.log(err);
+        });
+    }).catch(err => {
+        console.log(err);
+    });
+}
