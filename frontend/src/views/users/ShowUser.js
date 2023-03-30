@@ -87,8 +87,7 @@ function ShowUser() {
     function formatDate(date){
         return moment(date).format("DD.MM.YYYY HH:mm:ss");
     }
-
-    console.log(myProfile);
+    
     return (
         <>
             <Alert hidden={hiddenError} variant="danger" onClose={() => setHiddenError(true)} dismissible>

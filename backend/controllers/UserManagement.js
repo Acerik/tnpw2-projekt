@@ -3,6 +3,8 @@ const bcrypt = require('bcrypt');
 const validator = require('validator');
 const saltRounds = 10;
 
+const MinPasswordLength = 4;
+
 exports.Registration = async (data, res) => {
     let errors = Array();
     if (data.password !== data.confirmPassword) {
@@ -15,7 +17,7 @@ exports.Registration = async (data, res) => {
     if(data.username.length < 3){
         errors.push("Uživatelské jméno musí obsahovat alespoň 3 znaky.")
     }
-    if(data.password.length < 4) {
+    if(data.password.length < MinPasswordLength) {
         errors.push("Heslo musí obsahovat alespoň 4 znaky.")
     }
     if (errors.length !== 0) {
@@ -91,17 +93,29 @@ exports.EditUser = async (data, res) => {
             }
         }
         // if password change => passwordOld with current password same check, new password check with confirmPassword
-        if(data.password.length > 1 && data.confirmPassword) {
+        if(data.password.length > 1 && data.confirmPassword.length > 1) {
+            if(data.password.length < MinPasswordLength || data.confirmPassword.length < MinPasswordLength){
+                res.send(["Heslo musí být minimálně " + (MinPasswordLength) + " znaků dlouhé."]);
+                return null;
+            }
             if (data.password === data.confirmPassword) {
                 if (!bcrypt.compareSync(data.oldPassword, currentUserDb.password)) {
                     res.send(["Staré heslo není správné."]);
                     return null;
+                } else {
+                    let salt = bcrypt.genSaltSync(saltRounds);
+                    data.password = bcrypt.hashSync(data.password, salt);
+                    data.confirmPassword = data.password;
                 }
             } else {
                 res.send(["Nová hesla se nerovnají."]);
                 return null;
             }
+        } else {
+            data.password = currentUserDb.password;
         }
+        delete data["confirmPassword"];
+        delete data["oldPassword"];
         // do update
         UserModel.findByIdAndUpdate(data._id, data).then(updatedUser => {
             res.send("Úprava byla provedena.");
