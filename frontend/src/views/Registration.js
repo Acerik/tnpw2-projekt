@@ -2,7 +2,6 @@ import axios from 'axios';
 import {BASE_URL, AxiosConfig} from "../components/AxiosConfig";
 import React, {useState} from 'react';
 import {Form, Button, Alert, InputGroup} from 'react-bootstrap';
-import Feedback from "react-bootstrap/Feedback";
 
 function Registration() {
 

@@ -20,6 +20,7 @@ function App() {
         <Router>
             <Navbar/>
             <Routes>
+                <Route path={'' || '/'} element={<ListAdvertises/>}/>
                 <Route path='/inzeraty/:page' element={<ListAdvertises/>}/>
                 <Route path='/inzeraty/' element={<ListAdvertises/>}/>
 

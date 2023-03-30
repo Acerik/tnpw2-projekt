@@ -10,8 +10,7 @@ import React from 'react';
  * */
 export const ProtectedRoute = ({childrenRoute, mustBeLogged, alternativePath}) => {
     const [cookies] = useCookies('userId');
-    // kontrola skrze délku userid z cookies, při použití !== undefined, docházelo k chybám, které byly viditelné skrze console.log
-    let userLogged = cookies.userId.length > 9;
+    let userLogged = (cookies.userId === undefined) ? false : cookies.userId.length > 9;
     if(mustBeLogged && !userLogged){
         alternativePath = alternativePath ? alternativePath : "";
         return <Navigate to={alternativePath}/>
