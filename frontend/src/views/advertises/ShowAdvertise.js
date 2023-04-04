@@ -45,7 +45,7 @@ function ShowAdvertise(){
                 <Card.Header as="h5">{advertiseTypes[advertiseData.type]}</Card.Header>
                 <Card.Body>
                     <Card.Title>{advertiseData.name}</Card.Title>
-                    <Card.Text>{advertiseData.description}</Card.Text>
+                    <Card.Text id={"show-advertise"}>{advertiseData.description}</Card.Text>
                     {advertiseData.type === "sell" ?
                         <Card.Subtitle>{advertiseData.priceType === "price" ? (advertiseData.price + " Kč") : priceTypes[advertiseData.priceType]}</Card.Subtitle>
                     : ""}

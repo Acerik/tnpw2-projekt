@@ -55,7 +55,7 @@ function ListAdvertises(){
                             <Card.Title>
                                 <Card.Link href={"/inzerat/" + advertise._id}>{advertise.name}</Card.Link>
                             </Card.Title>
-                            <Card.Text>{advertise.description.substring(0, 200)}</Card.Text>
+                            <Card.Text>{advertise.description.substring(0, 200) + (advertise.description.length > 200 ? "..." : " ")}</Card.Text>
                             <Card.Text>{advertiseTypes[advertise.type]}</Card.Text>
                             {advertise.type === "sell" ?
                                 <Card.Subtitle>{advertise.priceType === "price" ? ("Cena: " + advertise.price + " Kč") : priceTypes[advertise.priceType]}</Card.Subtitle>
