@@ -90,7 +90,7 @@ function EditUser() {
     }
 
     return (
-        <>
+        <div id='content'>
             <Alert hidden={hiddenError} variant="danger" onClose={()=>setHiddenError(true)} dismissible>
                 <Alert.Heading>Chyby při úpravě profilu</Alert.Heading>
                 <p id="errors-p"> </p>
@@ -149,7 +149,7 @@ function EditUser() {
                 </InputGroup>
                 <Button variant="primary" type="submit" onClick={onSubmit}>Upravit</Button>
             </Form>
-        </>
+        </div>
     )
 }
 

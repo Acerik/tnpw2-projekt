@@ -155,7 +155,7 @@ function AdvertiseEditor() {
     }
 
     return (
-        <>
+        <div id='content'>
             <Alert hidden={hiddenError} variant="danger" onClose={() => setHiddenError(true)} dismissible>
                 <Alert.Heading>Chyba</Alert.Heading>
                 <p id="errors-p"> </p>
@@ -193,7 +193,7 @@ function AdvertiseEditor() {
                 </InputGroup>
                 <Button variant="primary" type="submit" onClick={onSubmit}>{advertiseId ? "Upravit inzerát" : "Přidat inzerát"}</Button>
             </Form>
-        </>
+        </div>
     );
 }
 

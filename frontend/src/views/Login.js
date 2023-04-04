@@ -36,7 +36,7 @@ function Login() {
     }
 
     return (
-        <>
+        <div id='content'>
             <Alert hidden={hiddenError} variant="danger" onClose={() => setHiddenError(true)} dismissible>
                 <Alert.Heading>Přihlášení se nezdařilo</Alert.Heading>
                 <p id="errors-p"> </p>
@@ -58,7 +58,7 @@ function Login() {
                 </Form.Group>
                 <Button variant="primary" type="submit" onClick={onSubmit}>Přihlásit</Button>
             </Form>
-        </>
+        </div>
     );
 }
 

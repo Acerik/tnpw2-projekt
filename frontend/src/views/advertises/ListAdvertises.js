@@ -47,7 +47,7 @@ function ListAdvertises(){
     }
 
     return (
-        <>
+        <div id='content'>
             {advertises.map(advertise => {
                 return (
                     <Card key={advertise._id}>
@@ -76,12 +76,12 @@ function ListAdvertises(){
                 <Pagination.Item href={"/inzeraty/" + Number(page-1)} hidden={(page - 1 === 1) || (page === 1)}>{page-1}</Pagination.Item>
                 <Pagination.Item active>{page}</Pagination.Item>
                 <Pagination.Item href={"/inzeraty/" + Number(page+1)} hidden={(page + 1 === maxPage) || (page === maxPage)}>{page+1}</Pagination.Item>
-                <Pagination.Ellipsis disabled={true} hidden={(maxPage === page) || (page + 2 === maxPage) || (maxPage-2 === page + 1) || (maxPage === page+1)}/>
+                <Pagination.Ellipsis disabled={true} hidden={(maxPage === page) || (page + 2 === maxPage) ||  (maxPage === page+1)}/>
                 <Pagination.Item href={"/inzeraty/" + maxPage} hidden={maxPage === page}>{maxPage}</Pagination.Item>
                 <Pagination.Next href={"/inzeraty/" + Number(page+1)} hidden={maxPage === page}/>
                 <Pagination.Last href={"/inzeraty/" + maxPage} hidden={maxPage === page}/>
             </Pagination>
-        </>
+        </div>
     )
 }
 

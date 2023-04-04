@@ -40,7 +40,7 @@ function ShowAdvertise(){
     }
 
     return (
-        <>
+        <div id='content'>
             <Card>
                 <Card.Header as="h5">{advertiseTypes[advertiseData.type]}</Card.Header>
                 <Card.Body>
@@ -56,7 +56,7 @@ function ShowAdvertise(){
                         <Card.Footer className="text-muted" >Poslední úprava: {formatDate(advertiseData.lastUpdate)}</Card.Footer>
                     }
             </Card>
-        </>
+        </div>
     );
 }
 

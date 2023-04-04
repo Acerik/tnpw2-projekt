@@ -87,9 +87,9 @@ function ShowUser() {
     function formatDate(date){
         return moment(date).format("DD.MM.YYYY HH:mm:ss");
     }
-    
+
     return (
-        <>
+        <div id='content'>
             <Alert hidden={hiddenError} variant="danger" onClose={() => setHiddenError(true)} dismissible>
                 <Alert.Heading>Chyba</Alert.Heading>
                 <p id="errors-p"> </p>
@@ -146,7 +146,7 @@ function ShowUser() {
             })}
                 </Card.Body>
             </Card>
-        </>
+        </div>
     );
 }
 

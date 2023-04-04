@@ -88,7 +88,7 @@ function Registration() {
     }
 
     return (
-        <>
+        <div id='content'>
             <Alert hidden={hiddenError} variant="danger" onClose={()=>setHiddenError(true)} dismissible>
                 <Alert.Heading>Chyby při registraci</Alert.Heading>
                 <p id="errors-p"> </p>
@@ -156,7 +156,7 @@ function Registration() {
                 </InputGroup>
                 <Button variant="primary" type="submit">Registrovat</Button>
             </Form>
-        </>
+        </div>
     );
 }
 
