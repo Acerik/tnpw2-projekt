@@ -2,9 +2,11 @@ import axios from 'axios';
 import {BASE_URL, AxiosConfig} from "../components/AxiosConfig";
 import React, {useState} from 'react';
 import {Form, Button, Alert, InputGroup} from 'react-bootstrap';
+import {useNavigate} from "react-router-dom";
 
 function Registration() {
 
+    const navigate = useNavigate();
     const [regState, setRegState] = useState({
         email: "",
         username: "",
@@ -28,7 +30,6 @@ function Registration() {
         if(e.currentTarget.checkValidity() === false){
             e.stopPropagation();
         } else {
-            console.log(regState);
             axios.post(BASE_URL + "/registration", JSON.stringify(regState), AxiosConfig)
                 .then(res => {
                     console.log(res);
@@ -41,11 +42,21 @@ function Registration() {
                         setHiddenError(true);
                         setHiddenSuccess(false);
                         setRegState({
-                            email: regState.email,
-                            username: regState.username,
+                            email: "",
+                            username: "",
                             password: "",
-                            confirmPassword: ""
+                            confirmPassword: "",
+                            phoneNumber: "",
+                            firstName: "",
+                            lastName: "",
+                            address: {
+                                zipCode: "",
+                                city: ""
+                            }
                         });
+                        setTimeout(() => {
+                            navigate('/prihlaseni');
+                        }, 2000);
                     }
                 }).catch(res => {
                 console.log(res);

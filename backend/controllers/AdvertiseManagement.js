@@ -7,8 +7,8 @@ exports.AddAdvertise = (userId, data, res) => {
     let now = Date.now();
     advertiseToAdd.createdOn = now;
     advertiseToAdd.lastUpdate = now;
-    advertiseToAdd.save().then(() => {
-        res.send("Uloženo");
+    advertiseToAdd.save().then((saved) => {
+        res.send({message: "Uloženo", data: saved});
     }).catch(err => {
         console.log(err);
     });

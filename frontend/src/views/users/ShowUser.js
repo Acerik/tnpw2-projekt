@@ -35,7 +35,11 @@ function ShowUser() {
         type: "",
         createdOn: "",
         lastUpdate: "",
-        owner: ""
+        owner: "",
+        address: {
+            city: "",
+            zipCode: ""
+        }
     }]);
 
     if (firstLoad) {
@@ -131,6 +135,7 @@ function ShowUser() {
                             {advertise.type === "sell" ?
                                 <Card.Subtitle>{advertise.priceType === "price" ? ("Cena: " + advertise.price + " Kč") : priceTypes[advertise.priceType]}</Card.Subtitle>
                                 : ""}
+                            <Card.Subtitle>{"Obec: " + advertise.address.city + " PSČ: " + advertise.address.zipCode}</Card.Subtitle>
                             {myProfile ? <>
                                 <Card.Link href={'/upravit-inzerat/'+advertise._id}>Upravit inzerát</Card.Link>
                                 <Card.Link advertiseid={advertise._id} href={"#"} onClick={deleteAdvertise}>Smazat inzerát</Card.Link>

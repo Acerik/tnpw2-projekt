@@ -10,6 +10,10 @@ let AdvertiseModel = new Schema({
     createdOn: Date,
     lastUpdate: Date,
     owner: String,
+    address: {
+        city: String,
+        zipCode: String
+    },
     id: String
 });
 

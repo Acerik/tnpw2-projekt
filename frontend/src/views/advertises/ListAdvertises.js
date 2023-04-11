@@ -23,7 +23,11 @@ function ListAdvertises(){
         type: "",
         createdOn: "",
         lastUpdate: "",
-        owner: ""
+        owner: "",
+        address: {
+            city: "",
+            zipCode: ""
+        }
     }]);
 
     if(firstLoad){
@@ -60,6 +64,7 @@ function ListAdvertises(){
                             {advertise.type === "sell" ?
                                 <Card.Subtitle>{advertise.priceType === "price" ? ("Cena: " + advertise.price + " Kč") : priceTypes[advertise.priceType]}</Card.Subtitle>
                                 : ""}
+                            <Card.Subtitle>{"Obec: " + advertise.address.city + " PSČ: " + advertise.address.zipCode}</Card.Subtitle>
                         </Card.Body>
                         <Card.Footer className="text-muted">Přidáno: {formatDate(advertise.createdOn)}</Card.Footer>
                         {advertise.createdOn === advertise.lastUpdate ? null :

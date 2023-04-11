@@ -19,3 +19,6 @@ div #content {
 #show-advertise{
   white-space: pre-wrap;
 }
+.card {
+  margin-top: 10px;
+}
