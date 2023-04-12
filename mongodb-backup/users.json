@@ -1,0 +1,141 @@
+[{
+  "_id": {
+    "$oid": "641b4f911eb2d920be5d470b"
+  },
+  "username": "obchodnicek",
+  "password": "$2b$10$FR3s2fXtAunZ/im6Jc2nte/e24wS1oDJziBoWUYjbw1.lKmr1Vg4.",
+  "email": "random1@random.cz",
+  "__v": 0,
+  "address": {
+    "zipCode": "500 02",
+    "city": "Hradec Králové"
+  },
+  "createdOn": {
+    "$date": {
+      "$numberLong": "1679343673300"
+    }
+  },
+  "firstName": "Pavel",
+  "lastName": "Novák",
+  "phoneNumber": "730230150"
+},{
+  "_id": {
+    "$oid": "6435aa1912fa44ccf013c712"
+  },
+  "username": "slavek",
+  "password": "$2b$10$I7vR1OEwXM/EUiaPl88WsuWaA7NLswMm0M2WEL9pL5ulD09nJTkDK",
+  "email": "random3@random.cz",
+  "createdOn": {
+    "$date": {
+      "$numberLong": "1681238553434"
+    }
+  },
+  "firstName": "Petr",
+  "lastName": "Novák",
+  "phoneNumber": "700700700",
+  "address": {
+    "zipCode": "53012",
+    "city": "Pardubice"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6435aac812fa44ccf013c716"
+  },
+  "username": "bohousek",
+  "password": "$2b$10$2u3NE5a9fnQAJYBavp.iNOedvFiQfzvLf/D.YmWnvzN8XWCsixP9S",
+  "email": "random4@random.cz",
+  "createdOn": {
+    "$date": {
+      "$numberLong": "1681238728708"
+    }
+  },
+  "firstName": "Jan",
+  "lastName": "Novotný",
+  "phoneNumber": "700800900",
+  "address": {
+    "zipCode": "50401",
+    "city": "Nový Bydžov"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6435aba012fa44ccf013c71a"
+  },
+  "username": "rodinnyautobazar",
+  "password": "$2b$10$jlr8ooqEC6RHkZOtg0W8oOts6MgYBT5lgIo2L1NJy92v.Bf8Ei1Hu",
+  "email": "random6@random.cz",
+  "createdOn": {
+    "$date": {
+      "$numberLong": "1681238944272"
+    }
+  },
+  "firstName": "",
+  "lastName": "",
+  "phoneNumber": "",
+  "address": {
+    "zipCode": "50401",
+    "city": "Prasek"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6435abda12fa44ccf013c71e"
+  },
+  "username": "indian",
+  "password": "$2b$10$IUgarTZgj/eZCnjN6AAgLODM12BQ7IFncM2boUu06H9nCKhBJXnZC",
+  "email": "random7@random.cz",
+  "createdOn": {
+    "$date": {
+      "$numberLong": "1681239002854"
+    }
+  },
+  "firstName": "Josef",
+  "lastName": "Horvát",
+  "phoneNumber": "650760870",
+  "address": {
+    "zipCode": "50315",
+    "city": "Nechanice"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6435ac1912fa44ccf013c722"
+  },
+  "username": "motorkar",
+  "password": "$2b$10$i86DiupAXn56xc0Kc70AmuhbF1LZRToCLg60abGeN0aAcGNZ05tt.",
+  "email": "random5@random.cz",
+  "createdOn": {
+    "$date": {
+      "$numberLong": "1681239065380"
+    }
+  },
+  "firstName": "Gustav",
+  "lastName": "Havel",
+  "phoneNumber": "700300300",
+  "address": {
+    "zipCode": "50801",
+    "city": "Hořice"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6436f11d18c75e4cd3831e35"
+  },
+  "username": "jelen",
+  "password": "$2b$10$ItOKhKkpklA4ZR9S0bTmBOZnHeKuV/c6rwHzn7rFOooA65le84fae",
+  "email": "random2@random.cz",
+  "createdOn": {
+    "$date": {
+      "$numberLong": "1681322269832"
+    }
+  },
+  "firstName": "František",
+  "lastName": "Vedral",
+  "phoneNumber": "700121958",
+  "address": {
+    "zipCode": "50351",
+    "city": "Chlumec nad Cidlinou"
+  },
+  "__v": 0
+}]

@@ -1,9 +1,33 @@
 const UserModel = require("../models/UserModel");
 const bcrypt = require('bcrypt');
 const validator = require('validator');
+const fs = require('fs');
+const mongoose = require("mongoose");
 const saltRounds = 10;
 
 const MinPasswordLength = 4;
+
+exports.CountUsers = async () => {
+    return (UserModel.countDocuments());//.then(num => {return !(num > 0)}).catch(err => {console.log(err);return false});
+}
+
+exports.InitData = (path) => {
+    if(!fs.existsSync(path)){
+        console.log("Soubor podle zadané cesty nebyl nalezen. Cesta: " + path);
+        return;
+    }
+    let raw = fs.readFileSync(path);
+    let usersJson = JSON.parse(raw);
+    usersJson.forEach(user => {
+        user["_id"] = mongoose.mongo.ObjectId.createFromHexString(user["_id"]["$oid"]);
+        user["createdOn"] = new Date(Number(user["createdOn"]["$date"]["$numberLong"]));
+    });
+    UserModel.collection.insertMany(usersJson).then(res => {
+        console.log("Uživatelé byli úspěšně vloženi, počet vložených uživatelů: " + res.insertedCount)
+    }).catch(err=>{
+        console.log(err);
+    });
+}
 
 exports.Registration = async (data, res) => {
     let errors = Array();

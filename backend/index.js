@@ -1,4 +1,5 @@
 const express = require("express");
+const readline = require('readline');
 const sessions = require("express-session");
 const cookieParser = require("cookie-parser");
 const PORT = 8080;
@@ -8,9 +9,28 @@ const cors = require('cors');
 
 const UserManagement = require('./controllers/UserManagement');
 const AdvertiseManagement = require('./controllers/AdvertiseManagement');
+const rl = readline.createInterface({input: process.stdin, output: process.stdout});
 
 main().catch(err =>console.log(err));
-main().then(res => console.log("MongoDB is connected"));
+main().then(() => {
+    console.log("Připojení k MongoDB, se zdařilo.");
+    AdvertiseManagement.CountAdvertises().then(advertises => {
+       UserManagement.CountUsers().then(users => {
+           if(users === 0 && advertises === 0) {
+               console.log("Databáze je prázdná.");
+               rl.question("Chcete vložit předdefinovaná data do databáze? Zadejte: y - ano | n - ne.", option=> {
+                   if(option.toLowerCase().trim() === "y" || option.toLowerCase().trim() === "yes"){
+                       console.log("Začínám vkládat data do databáze.");
+                       UserManagement.InitData("../mongodb-backup/users.json");
+                       AdvertiseManagement.InitData("../mongodb-backup/advertises.json");
+                   } else {
+                       console.log("Data nebudou vložena do databáze, pokud by jste chtěli data vložit, je nutné restartovat server.");
+                   }
+               });
+           }
+       });
+    });
+});
 
 app.use(sessions({
     secret:"thisissecretkey",
@@ -26,7 +46,7 @@ app.use(cors({
 app.use(express.json());
 
 async function main(){
-    await mongoose.connect('mongodb://127.0.0.1:27017/inzerce');
+    await mongoose.connect('mongodb://127.0.0.1:27017/vana-inzertni-web');
 }
 
 app.post('/api/registration', (req, res) => {
@@ -141,5 +161,5 @@ app.get('/api/get-advertises-from-user', (req,res)=>{
 });
 
 app.listen(PORT, () => {
-    console.log("Server listening on port " + PORT);
+    console.log("Server funguje na portu: " + PORT);
 });

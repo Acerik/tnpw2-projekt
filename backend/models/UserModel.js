@@ -13,7 +13,7 @@ let UserModel = new Schema({
         zipCode: {type: String, required: false},
         city: {type: String, required: false}
     },
-    id: String
+    _id: mongoose.Schema.Types.ObjectId
 });
 
 module.exports = mongoose.model('user', UserModel);

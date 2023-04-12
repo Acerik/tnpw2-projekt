@@ -1,5 +1,30 @@
 const AdvertiseModel = require('../models/AdvertiseModel');
 const UserModel = require('../models/UserModel');
+const fs = require("fs");
+const mongoose = require("mongoose");
+
+exports.InitData = (path) => {
+    if(!fs.existsSync(path)){
+        console.log("Soubor podle zadané cesty nebyl nalezen. Cesta: " + path);
+        return;
+    }
+    let raw = fs.readFileSync(path);
+    let advertisesJson = JSON.parse(raw);
+    advertisesJson.forEach(advertise => {
+        advertise["_id"] = mongoose.mongo.ObjectId.createFromHexString(advertise["_id"]["$oid"]);
+        advertise["createdOn"] = new Date(Number(advertise["createdOn"]["$date"]["$numberLong"]));
+        advertise["lastUpdate"] = new Date(Number(advertise["lastUpdate"]["$date"]["$numberLong"]));
+    });
+    AdvertiseModel.collection.insertMany(advertisesJson).then(res => {
+        console.log("Inzeráty byly úspěšně vloženy, počet vložených inzerátů: " + res.insertedCount)
+    }).catch(err=>{
+        console.log(err);
+    });
+}
+
+exports.CountAdvertises =async () => {
+    return (AdvertiseModel.countDocuments());//.then(num => {return num}).catch(err => {console.log(err);return false});
+}
 
 exports.AddAdvertise = (userId, data, res) => {
     const advertiseToAdd = new AdvertiseModel(data);

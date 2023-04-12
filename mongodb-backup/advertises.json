@@ -1,0 +1,1466 @@
+[{
+  "_id": {
+    "$oid": "6435d76c7f26e2d844e3eb84"
+  },
+  "name": "Jízdní kolo",
+  "price": null,
+  "priceType": "offer",
+  "description": "Prodám jízdní kolo\nKolo bylo zakoupeno 2020 v zimě, nebylo téměř využito díky covidu a aktuálně můj zdravotní stav není vhodný pro jízdu na kole",
+  "type": "sell",
+  "address": {
+    "city": "Hradec Králové",
+    "zipCode": "500 02"
+  },
+  "owner": "641b4f911eb2d920be5d470b",
+  "createdOn": {
+    "$date": {
+      "$numberLong": "1681250156450"
+    }
+  },
+  "lastUpdate": {
+    "$date": {
+      "$numberLong": "1681250156450"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6436e2ef6572cffc3c3b16db"
+  },
+  "name": "Kolo",
+  "price": 2000,
+  "description": "Prodám horské kolo s pevnou vidlicí a kotoučovými brzdami. Velikost rámu 18 palců.",
+  "priceType": "free",
+  "type": "sell",
+  "owner": "641b4f911eb2d920be5d470b",
+  "address": {
+    "zipCode": "500 02",
+    "city": "Hradec Králové"
+  },
+  "createdOn": {
+    "$date": {
+      "$numberLong": "1681295400000"
+    }
+  },
+  "lastUpdate": {
+    "$date": {
+      "$numberLong": "1681322768306"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "6436e2ef6572cffc3c3b16dc"
+  },
+  "name": "Televize",
+  "price": 5000,
+  "description": "Prodám televizi značky Samsung. Úhlopříčka 43 palců, rozlišení Full HD, Smart TV funkce.",
+  "priceType": "price",
+  "type": "sell",
+  "owner": "641b4f911eb2d920be5d470b",
+  "address": {
+    "city": "Hradec Králové",
+    "zipCode": "500 02"
+  },
+  "createdOn": {
+    "$date": {
+      "$numberLong": "1681298100000"
+    }
+  },
+  "lastUpdate": {
+    "$date": {
+      "$numberLong": "1681298100000"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "6436e2ef6572cffc3c3b16dd"
+  },
+  "name": "Kniha",
+  "price": 250,
+  "description": "Prodám knihu 'Válka světů' od H.G. Wellse. V anglickém jazyce, v dobrém stavu.",
+  "priceType": "price",
+  "type": "sell",
+  "owner": "641b4f911eb2d920be5d470b",
+  "address": {
+    "city": "Hradec Králové",
+    "zipCode": "500 02"
+  },
+  "createdOn": {
+    "$date": {
+      "$numberLong": "1681300800000"
+    }
+  },
+  "lastUpdate": {
+    "$date": {
+      "$numberLong": "1681300800000"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "6436e2ef6572cffc3c3b16de"
+  },
+  "name": "Smartphone",
+  "price": 8000,
+  "description": "Prodám smartphone značky Apple. Model iPhone 12, kapacita 128 GB, barevná varianta modrá.",
+  "priceType": "price",
+  "type": "sell",
+  "owner": "641b4f911eb2d920be5d470b",
+  "address": {
+    "city": "Hradec Králové",
+    "zipCode": "500 02"
+  },
+  "createdOn": {
+    "$date": {
+      "$numberLong": "1681306200000"
+    }
+  },
+  "lastUpdate": {
+    "$date": {
+      "$numberLong": "1681306200000"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "6436e37b6572cffc3c3b16e0"
+  },
+  "name": "Křovinořez",
+  "price": 3500,
+  "description": "Prodám křovinořez značky Stihl. Benzínový, výkon 2,2 kW, hmotnost 5,2 kg.",
+  "priceType": "price",
+  "type": "sell",
+  "owner": "641b4f911eb2d920be5d470b",
+  "address": {
+    "city": "Hradec Králové",
+    "zipCode": "500 02"
+  },
+  "createdOn": {
+    "$date": {
+      "$numberLong": "1681295723000"
+    }
+  },
+  "lastUpdate": {
+    "$date": {
+      "$numberLong": "1681295723000"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "6436e37b6572cffc3c3b16e1"
+  },
+  "name": "Chladnička",
+  "price": 6000,
+  "description": "Prodám chladničku značky Bosch. Objem 240 litrů, energ. třída A++, rozměry 150 x 60 x 65 cm.",
+  "priceType": "price",
+  "type": "sell",
+  "owner": "641b4f911eb2d920be5d470b",
+  "address": {
+    "city": "Hradec Králové",
+    "zipCode": "500 02"
+  },
+  "createdOn": {
+    "$date": {
+      "$numberLong": "1681291215000"
+    }
+  },
+  "lastUpdate": {
+    "$date": {
+      "$numberLong": "1681291215000"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "6436e37b6572cffc3c3b16e2"
+  },
+  "name": "Žehlička",
+  "price": 800,
+  "description": "Prodám žehličku značky Philips. Výkon 2200 W, napařování, funkce samočištění.",
+  "priceType": "price",
+  "type": "sell",
+  "owner": "641b4f911eb2d920be5d470b",
+  "address": {
+    "city": "Hradec Králové",
+    "zipCode": "500 02"
+  },
+  "createdOn": {
+    "$date": {
+      "$numberLong": "1681307270000"
+    }
+  },
+  "lastUpdate": {
+    "$date": {
+      "$numberLong": "1681307270000"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "6436e37b6572cffc3c3b16e3"
+  },
+  "name": "Kávomlýnek",
+  "price": 1200,
+  "description": "Prodám kávomlýnek značky Baratza. Konická mlecí kávovna, 40 různých nastavení jemnosti mletí.",
+  "priceType": "price",
+  "type": "sell",
+  "owner": "641b4f911eb2d920be5d470b",
+  "address": {
+    "city": "Hradec Králové",
+    "zipCode": "500 02"
+  },
+  "createdOn": {
+    "$date": {
+      "$numberLong": "1681315838000"
+    }
+  },
+  "lastUpdate": {
+    "$date": {
+      "$numberLong": "1681315838000"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "6436e4886572cffc3c3b16e7"
+  },
+  "name": "Mikrovlnná trouba Panasonic",
+  "price": 1800,
+  "description": "Prodám mikrovlnnou troubu značky Panasonic. Kapacita 25 litrů, 8 výkonových úrovní.",
+  "priceType": "price",
+  "type": "sell",
+  "owner": "6435aa1912fa44ccf013c712",
+  "address": {
+    "city": "Pardubice",
+    "zipCode": "530 12"
+  },
+  "createdOn": {
+    "$date": {
+      "$numberLong": "1681292843582"
+    }
+  },
+  "lastUpdate": {
+    "$date": {
+      "$numberLong": "1681292843582"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "6436e4886572cffc3c3b16e8"
+  },
+  "name": "Notebook Acer",
+  "price": 7000,
+  "description": "Prodám notebook značky Acer. Model Aspire 5, procesor Intel Core i5, kapacita 512 GB SSD.",
+  "priceType": "price",
+  "type": "sell",
+  "owner": "6435aa1912fa44ccf013c712",
+  "address": {
+    "city": "Pardubice",
+    "zipCode": "530 12"
+  },
+  "createdOn": {
+    "$date": {
+      "$numberLong": "1681301751924"
+    }
+  },
+  "lastUpdate": {
+    "$date": {
+      "$numberLong": "1681301751924"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "6436e4886572cffc3c3b16e9"
+  },
+  "name": "Fén na vlasy BaByliss",
+  "price": 900,
+  "description": "Prodám fén na vlasy značky BaByliss. 3 teplotní stupně, 2 rychlosti foukání.",
+  "priceType": "price",
+  "type": "sell",
+  "owner": "6435aa1912fa44ccf013c712",
+  "address": {
+    "city": "Pardubice",
+    "zipCode": "530 12"
+  },
+  "createdOn": {
+    "$date": {
+      "$numberLong": "1681320792771"
+    }
+  },
+  "lastUpdate": {
+    "$date": {
+      "$numberLong": "1681320792771"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "6436e4886572cffc3c3b16ea"
+  },
+  "name": "Elektrická kytara Fender",
+  "price": 12000,
+  "description": "Prodám elektrickou kytaru značky Fender. Model Stratocaster, barva sunburst.",
+  "priceType": "price",
+  "type": "sell",
+  "owner": "6435aa1912fa44ccf013c712",
+  "address": {
+    "city": "Pardubice",
+    "zipCode": "530 12"
+  },
+  "createdOn": {
+    "$date": {
+      "$numberLong": "1681333625621"
+    }
+  },
+  "lastUpdate": {
+    "$date": {
+      "$numberLong": "1681333625621"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "6436e5486572cffc3c3b16ec"
+  },
+  "name": "Řetězová pila",
+  "price": 2500,
+  "description": "Prodám novou řetězovou pilu značky Stihl. Motor o výkonu 2,7 kW, délka lišty 45 cm.",
+  "priceType": "price",
+  "type": "sell",
+  "owner": "6435aa1912fa44ccf013c712",
+  "address": {
+    "city": "Pardubice",
+    "zipCode": "530 12"
+  },
+  "createdOn": {
+    "$date": {
+      "$numberLong": "1681291421123"
+    }
+  },
+  "lastUpdate": {
+    "$date": {
+      "$numberLong": "1681291421123"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "6436e5486572cffc3c3b16ed"
+  },
+  "name": "Lednice",
+  "price": 4000,
+  "description": "Prodám lednici značky Bosch. Objem 350 litrů, energetická třída A++, NoFrost systém.",
+  "priceType": "price",
+  "type": "sell",
+  "owner": "6435aa1912fa44ccf013c712",
+  "address": {
+    "city": "Pardubice",
+    "zipCode": "530 12"
+  },
+  "createdOn": {
+    "$date": {
+      "$numberLong": "1681294530456"
+    }
+  },
+  "lastUpdate": {
+    "$date": {
+      "$numberLong": "1681294530456"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "6436e5486572cffc3c3b16ee"
+  },
+  "name": "Kytara",
+  "price": 3500,
+  "description": "Prodám elektrickou kytaru značky Fender. Model Stratocaster, barva Olympic White.",
+  "priceType": "price",
+  "type": "sell",
+  "owner": "6435aa1912fa44ccf013c712",
+  "address": {
+    "city": "Pardubice",
+    "zipCode": "530 12"
+  },
+  "createdOn": {
+    "$date": {
+      "$numberLong": "1681308432789"
+    }
+  },
+  "lastUpdate": {
+    "$date": {
+      "$numberLong": "1681308432789"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "6436e5486572cffc3c3b16ef"
+  },
+  "name": "Vysavač",
+  "price": 1500,
+  "description": "Prodám vysavač značky Philips. Model PowerPro Compact, výkon 750 W.",
+  "priceType": "price",
+  "type": "sell",
+  "owner": "6435aa1912fa44ccf013c712",
+  "address": {
+    "city": "Pardubice",
+    "zipCode": "530 12"
+  },
+  "createdOn": {
+    "$date": {
+      "$numberLong": "1681317775234"
+    }
+  },
+  "lastUpdate": {
+    "$date": {
+      "$numberLong": "1681317775234"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "6436e5c56572cffc3c3b16f3"
+  },
+  "name": "Mikrovlnná trouba LG",
+  "price": 1500,
+  "description": "Prodám mikrovlnnou troubu značky LG. Kapacita 20 litrů, 6 výkonových úrovní.",
+  "priceType": "price",
+  "type": "sell",
+  "owner": "6435aac812fa44ccf013c716",
+  "address": {
+    "city": "Nový Bydžov",
+    "zipCode": "50401"
+  },
+  "createdOn": {
+    "$date": {
+      "$numberLong": "1681288200000"
+    }
+  },
+  "lastUpdate": {
+    "$date": {
+      "$numberLong": "1681288200000"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "6436e5c56572cffc3c3b16f4"
+  },
+  "name": "Kávovar DeLonghi",
+  "price": 3000,
+  "description": "Prodám kávovar značky DeLonghi. Kávovar na kapsle, automatické vypínání po 9 minutách nečinnosti.",
+  "priceType": "price",
+  "type": "sell",
+  "owner": "6435aac812fa44ccf013c716",
+  "address": {
+    "city": "Nový Bydžov",
+    "zipCode": "50401"
+  },
+  "createdOn": {
+    "$date": {
+      "$numberLong": "1681294500000"
+    }
+  },
+  "lastUpdate": {
+    "$date": {
+      "$numberLong": "1681294500000"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "6436e5c56572cffc3c3b16f5"
+  },
+  "name": "Parní čistič",
+  "price": 5000,
+  "description": "Prodám parní čistič Kärcher. Čistí podlahy, koberce, sklo, koupelny, kuchyně, vyčistí špínu i mastnotu.",
+  "priceType": "price",
+  "type": "sell",
+  "owner": "6435aac812fa44ccf013c716",
+  "address": {
+    "city": "Nový Bydžov",
+    "zipCode": "50401"
+  },
+  "createdOn": {
+    "$date": {
+      "$numberLong": "1681300800000"
+    }
+  },
+  "lastUpdate": {
+    "$date": {
+      "$numberLong": "1681300800000"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "6436e5c56572cffc3c3b16f6"
+  },
+  "name": "Šicí stroj",
+  "price": 8000,
+  "description": "Prodám šicí stroj Janome. Elektronický šicí stroj, plně automatizovaný, s mnoha funkcemi.",
+  "priceType": "price",
+  "type": "sell",
+  "owner": "6435aac812fa44ccf013c716",
+  "address": {
+    "city": "Nový Bydžov",
+    "zipCode": "50401"
+  },
+  "createdOn": {
+    "$date": {
+      "$numberLong": "1681309800000"
+    }
+  },
+  "lastUpdate": {
+    "$date": {
+      "$numberLong": "1681309800000"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "6436e6496572cffc3c3b16f8"
+  },
+  "name": "Mikrovlnná trouba LG",
+  "price": 1999,
+  "description": "Prodám mikrovlnnou troubu značky LG. Kapacita 20 litrů, 6 výkonových úrovní.",
+  "priceType": "price",
+  "type": "sell",
+  "owner": "6435aac812fa44ccf013c716",
+  "address": {
+    "city": "Nový Bydžov",
+    "zipCode": "50401"
+  },
+  "createdOn": {
+    "$date": {
+      "$numberLong": "1681294815000"
+    }
+  },
+  "lastUpdate": {
+    "$date": {
+      "$numberLong": "1681294815000"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "6436e6496572cffc3c3b16f9"
+  },
+  "name": "Kolo GT",
+  "price": 2999,
+  "description": "Prodám horské kolo značky GT. Velikost rámu 20 palců, tlumič vidlice.",
+  "priceType": "price",
+  "type": "sell",
+  "owner": "6435aac812fa44ccf013c716",
+  "address": {
+    "city": "Nový Bydžov",
+    "zipCode": "50401"
+  },
+  "createdOn": {
+    "$date": {
+      "$numberLong": "1681292102000"
+    }
+  },
+  "lastUpdate": {
+    "$date": {
+      "$numberLong": "1681292102000"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "6436e6496572cffc3c3b16fa"
+  },
+  "name": "Lednice Zanussi",
+  "price": 4999,
+  "description": "Prodám lednici značky Zanussi. Objem chladničky 240 litrů, objem mrazáku 70 litrů.",
+  "priceType": "price",
+  "type": "sell",
+  "owner": "6435aac812fa44ccf013c716",
+  "address": {
+    "city": "Nový Bydžov",
+    "zipCode": "50401"
+  },
+  "createdOn": {
+    "$date": {
+      "$numberLong": "1681298146000"
+    }
+  },
+  "lastUpdate": {
+    "$date": {
+      "$numberLong": "1681298146000"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "6436e6496572cffc3c3b16fb"
+  },
+  "name": "Pilník na nehty",
+  "price": 49,
+  "description": "Prodám pilník na nehty. Kvalitní materiál, vhodný pro běžné použití.",
+  "priceType": "price",
+  "type": "sell",
+  "owner": "6435aac812fa44ccf013c716",
+  "address": {
+    "city": "Nový Bydžov",
+    "zipCode": "50401"
+  },
+  "createdOn": {
+    "$date": {
+      "$numberLong": "1681303222000"
+    }
+  },
+  "lastUpdate": {
+    "$date": {
+      "$numberLong": "1681303222000"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "6436e6bc6572cffc3c3b16ff"
+  },
+  "name": "Audi A4",
+  "price": 350000,
+  "description": "Prodám Audi A4, r.v. 2015, najeto 110 000 km. Diesel, automat.",
+  "priceType": "price",
+  "type": "sell",
+  "owner": "6435aba012fa44ccf013c71a",
+  "address": {
+    "city": "Prasek",
+    "zipCode": "50401"
+  },
+  "createdOn": {
+    "$date": {
+      "$numberLong": "1681291385238"
+    }
+  },
+  "lastUpdate": {
+    "$date": {
+      "$numberLong": "1681291385238"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "6436e6bc6572cffc3c3b1700"
+  },
+  "name": "Volkswagen Golf",
+  "price": 180000,
+  "description": "Prodám Volkswagen Golf, r.v. 2010, najeto 150 000 km. Benzín, manuál.",
+  "priceType": "price",
+  "type": "sell",
+  "owner": "6435aba012fa44ccf013c71a",
+  "address": {
+    "city": "Prasek",
+    "zipCode": "50401"
+  },
+  "createdOn": {
+    "$date": {
+      "$numberLong": "1681293695420"
+    }
+  },
+  "lastUpdate": {
+    "$date": {
+      "$numberLong": "1681293695420"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "6436e6bc6572cffc3c3b1701"
+  },
+  "name": "Ford Fiesta",
+  "price": 120000,
+  "description": "Prodám Ford Fiesta, r.v. 2008, najeto 180 000 km. Benzín, manuál.",
+  "priceType": "price",
+  "type": "sell",
+  "owner": "6435aba012fa44ccf013c71a",
+  "address": {
+    "city": "Prasek",
+    "zipCode": "50401"
+  },
+  "createdOn": {
+    "$date": {
+      "$numberLong": "1681298121888"
+    }
+  },
+  "lastUpdate": {
+    "$date": {
+      "$numberLong": "1681298121888"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "6436e6bc6572cffc3c3b1702"
+  },
+  "name": "Škoda Octavia",
+  "price": 250000,
+  "description": "Prodám Škodu Octavia, r.v. 2013, najeto 90 000 km. Diesel, automat.",
+  "priceType": "price",
+  "type": "sell",
+  "owner": "6435aba012fa44ccf013c71a",
+  "address": {
+    "city": "Prasek",
+    "zipCode": "50401"
+  },
+  "createdOn": {
+    "$date": {
+      "$numberLong": "1681303338152"
+    }
+  },
+  "lastUpdate": {
+    "$date": {
+      "$numberLong": "1681303338152"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "6436e7f36572cffc3c3b1706"
+  },
+  "name": "Audi A3",
+  "price": 250000,
+  "description": "Rok výroby 2015, diesel, 130 000 km najeto.",
+  "priceType": "price",
+  "type": "sell",
+  "owner": "6435aba012fa44ccf013c71a",
+  "address": {
+    "city": "Prasek",
+    "zipCode": "50401"
+  },
+  "createdOn": {
+    "$date": {
+      "$numberLong": "1681291517653"
+    }
+  },
+  "lastUpdate": {
+    "$date": {
+      "$numberLong": "1681291517653"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "6436e7f36572cffc3c3b1707"
+  },
+  "name": "BMW X5",
+  "price": 650000,
+  "description": "Rok výroby 2018, benzín, 70 000 km najeto.",
+  "priceType": "price",
+  "type": "sell",
+  "owner": "6435aba012fa44ccf013c71a",
+  "address": {
+    "city": "Prasek",
+    "zipCode": "50401"
+  },
+  "createdOn": {
+    "$date": {
+      "$numberLong": "1681289121209"
+    }
+  },
+  "lastUpdate": {
+    "$date": {
+      "$numberLong": "1681289121209"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "6436e7f36572cffc3c3b1708"
+  },
+  "name": "Volkswagen Golf",
+  "price": 130000,
+  "description": "Rok výroby 2012, benzín, 150 000 km najeto.",
+  "priceType": "price",
+  "type": "sell",
+  "owner": "6435aba012fa44ccf013c71a",
+  "address": {
+    "city": "Prasek",
+    "zipCode": "50401"
+  },
+  "createdOn": {
+    "$date": {
+      "$numberLong": "1681294385112"
+    }
+  },
+  "lastUpdate": {
+    "$date": {
+      "$numberLong": "1681294385112"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "6436e7f36572cffc3c3b1709"
+  },
+  "name": "Mercedes-Benz E-Class",
+  "price": 800000,
+  "description": "Rok výroby 2017, diesel, 90 000 km najeto.",
+  "priceType": "price",
+  "type": "sell",
+  "owner": "6435aba012fa44ccf013c71a",
+  "address": {
+    "city": "Prasek",
+    "zipCode": "50401"
+  },
+  "createdOn": {
+    "$date": {
+      "$numberLong": "1681297366836"
+    }
+  },
+  "lastUpdate": {
+    "$date": {
+      "$numberLong": "1681297366836"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "6436e9a06572cffc3c3b170d"
+  },
+  "name": "Traktor",
+  "price": 1500000,
+  "description": "Prodám traktor značky John Deere s výkonem 120 kW. Ideální pro větší zemědělské podniky.",
+  "priceType": "price",
+  "type": "sell",
+  "owner": "6435abda12fa44ccf013c71e",
+  "address": {
+    "city": "Nechanice",
+    "zipCode": "50315"
+  },
+  "createdOn": {
+    "$date": {
+      "$numberLong": "1681295130000"
+    }
+  },
+  "lastUpdate": {
+    "$date": {
+      "$numberLong": "1681295130000"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "6436e9a06572cffc3c3b170e"
+  },
+  "name": "Kombajn",
+  "price": 2500000,
+  "description": "Prodám kombajn značky Claas s výkonem 150 kW. Kompletně servisovaný v roce 2022.",
+  "priceType": "price",
+  "type": "sell",
+  "owner": "6435abda12fa44ccf013c71e",
+  "address": {
+    "city": "Nechanice",
+    "zipCode": "50315"
+  },
+  "createdOn": {
+    "$date": {
+      "$numberLong": "1681290945000"
+    }
+  },
+  "lastUpdate": {
+    "$date": {
+      "$numberLong": "1681290945000"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "6436e9a06572cffc3c3b170f"
+  },
+  "name": "Sekačka na trávu",
+  "price": 15000,
+  "description": "Prodám sekačku na trávu značky Honda s výkonem 5,5 kW. Nová, nepoužitá.",
+  "priceType": "price",
+  "type": "sell",
+  "owner": "6435abda12fa44ccf013c71e",
+  "address": {
+    "city": "Nechanice",
+    "zipCode": "50315"
+  },
+  "createdOn": {
+    "$date": {
+      "$numberLong": "1681299620000"
+    }
+  },
+  "lastUpdate": {
+    "$date": {
+      "$numberLong": "1681299620000"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "6436e9a06572cffc3c3b1710"
+  },
+  "name": "Orba",
+  "price": 50000,
+  "description": "Prodám orbu značky Lemken s šířkou 3 metry. Použitá pouze jednu sezónu.",
+  "priceType": "price",
+  "type": "sell",
+  "owner": "6435abda12fa44ccf013c71e",
+  "address": {
+    "city": "Nechanice",
+    "zipCode": "50315"
+  },
+  "createdOn": {
+    "$date": {
+      "$numberLong": "1681304710000"
+    }
+  },
+  "lastUpdate": {
+    "$date": {
+      "$numberLong": "1681304710000"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "6436eb436572cffc3c3b1714"
+  },
+  "name": "Zdvihák pro traktor",
+  "price": 5000,
+  "description": "Prodám zdvihák pro traktor. Nosnost 2 tuny, výška zdvihu 1,5 metru.",
+  "priceType": "price",
+  "type": "sell",
+  "owner": "6435abda12fa44ccf013c71e",
+  "address": {
+    "city": "Nechanice",
+    "zipCode": "50315"
+  },
+  "createdOn": {
+    "$date": {
+      "$numberLong": "1681219650000"
+    }
+  },
+  "lastUpdate": {
+    "$date": {
+      "$numberLong": "1681219650000"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "6436eb436572cffc3c3b1715"
+  },
+  "name": "Vodní pumpa pro traktor",
+  "price": 3000,
+  "description": "Prodám vodní pumpu pro traktor. Výkon 50 litrů za minutu, tlak 3 bar.",
+  "priceType": "price",
+  "type": "sell",
+  "owner": "6435abda12fa44ccf013c71e",
+  "address": {
+    "city": "Nechanice",
+    "zipCode": "50315"
+  },
+  "createdOn": {
+    "$date": {
+      "$numberLong": "1681224732000"
+    }
+  },
+  "lastUpdate": {
+    "$date": {
+      "$numberLong": "1681224732000"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "6436eb436572cffc3c3b1716"
+  },
+  "name": "Pneumatiky pro traktor",
+  "price": 8000,
+  "description": "Prodám pneumatiky pro traktor. Rozměr 480/80 R38, výrobce Michelin, v dobrém stavu.",
+  "priceType": "price",
+  "type": "sell",
+  "owner": "6435abda12fa44ccf013c71e",
+  "address": {
+    "city": "Nechanice",
+    "zipCode": "50315"
+  },
+  "createdOn": {
+    "$date": {
+      "$numberLong": "1681229395000"
+    }
+  },
+  "lastUpdate": {
+    "$date": {
+      "$numberLong": "1681229395000"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "6436eb436572cffc3c3b1717"
+  },
+  "name": "Rozprašovač hnojiv pro traktor",
+  "price": 15000,
+  "description": "Prodám rozprašovač hnojiv pro traktor. Objem nádrže 1000 litrů, šíře postřiku 18 metrů.",
+  "priceType": "price",
+  "type": "sell",
+  "owner": "6435abda12fa44ccf013c71e",
+  "address": {
+    "city": "Nechanice",
+    "zipCode": "50315"
+  },
+  "createdOn": {
+    "$date": {
+      "$numberLong": "1681235123000"
+    }
+  },
+  "lastUpdate": {
+    "$date": {
+      "$numberLong": "1681235123000"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "6436ed5c6572cffc3c3b171d"
+  },
+  "name": "Honda CBR600RR",
+  "price": 125000,
+  "description": "Prodám motorku Honda CBR600RR. Rok výroby 2013, najeto 25 000 km, v perfektním stavu.",
+  "priceType": "price",
+  "type": "sell",
+  "owner": "6435ac1912fa44ccf013c722",
+  "address": {
+    "city": "Hořice",
+    "zipCode": "50801"
+  },
+  "createdOn": {
+    "$date": {
+      "$numberLong": "1681202841000"
+    }
+  },
+  "lastUpdate": {
+    "$date": {
+      "$numberLong": "1681202841000"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "6436ed5c6572cffc3c3b171e"
+  },
+  "name": "Suzuki GSX-R750",
+  "price": 90000,
+  "description": "Prodám motorku Suzuki GSX-R750. Rok výroby 2008, najeto 35 000 km, v dobrém stavu.",
+  "priceType": "price",
+  "type": "sell",
+  "owner": "6435ac1912fa44ccf013c722",
+  "address": {
+    "city": "Hořice",
+    "zipCode": "50801"
+  },
+  "createdOn": {
+    "$date": {
+      "$numberLong": "1681211625000"
+    }
+  },
+  "lastUpdate": {
+    "$date": {
+      "$numberLong": "1681211625000"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "6436ed5c6572cffc3c3b171f"
+  },
+  "name": "Kawasaki Ninja ZX-10R",
+  "price": 160000,
+  "description": "Prodám motorku Kawasaki Ninja ZX-10R. Rok výroby 2019, najeto 10 000 km, jako nová.",
+  "priceType": "price",
+  "type": "sell",
+  "owner": "6435ac1912fa44ccf013c722",
+  "address": {
+    "city": "Hořice",
+    "zipCode": "50801"
+  },
+  "createdOn": {
+    "$date": {
+      "$numberLong": "1681228508000"
+    }
+  },
+  "lastUpdate": {
+    "$date": {
+      "$numberLong": "1681228508000"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "6436ed5c6572cffc3c3b1720"
+  },
+  "name": "Harley-Davidson Road King",
+  "price": 220000,
+  "description": "Prodám motorku Harley-Davidson Road King. Rok výroby 2015, najeto 20 000 km, v perfektním stavu.",
+  "priceType": "price",
+  "type": "sell",
+  "owner": "6435ac1912fa44ccf013c722",
+  "address": {
+    "city": "Hořice",
+    "zipCode": "50801"
+  },
+  "createdOn": {
+    "$date": {
+      "$numberLong": "1681237632000"
+    }
+  },
+  "lastUpdate": {
+    "$date": {
+      "$numberLong": "1681237632000"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "6436ee3b6572cffc3c3b1722"
+  },
+  "name": "Yamaha YZF-R6",
+  "price": 169000,
+  "description": "Prodám motorku Yamaha YZF-R6 z roku 2016. Motorka je v perfektním stavu, má najeto pouze 12 000 km. Barva je modrá.",
+  "priceType": "price",
+  "type": "sell",
+  "owner": "6435ac1912fa44ccf013c722",
+  "address": {
+    "city": "Hořice",
+    "zipCode": "50801"
+  },
+  "createdOn": {
+    "$date": {
+      "$numberLong": "1681209323000"
+    }
+  },
+  "lastUpdate": {
+    "$date": {
+      "$numberLong": "1681209323000"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "6436ee3b6572cffc3c3b1723"
+  },
+  "name": "Honda CBR 600RR",
+  "price": 145000,
+  "description": "Prodám motorku Honda CBR 600RR z roku 2017. Motorka je v perfektním stavu, má najeto pouze 10 000 km. Barva je červená.",
+  "priceType": "price",
+  "type": "sell",
+  "owner": "6435ac1912fa44ccf013c722",
+  "address": {
+    "city": "Hořice",
+    "zipCode": "50801"
+  },
+  "createdOn": {
+    "$date": {
+      "$numberLong": "1681204931000"
+    }
+  },
+  "lastUpdate": {
+    "$date": {
+      "$numberLong": "1681204931000"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "6436ee3b6572cffc3c3b1724"
+  },
+  "name": "Suzuki GSX-R750",
+  "price": 130000,
+  "description": "Prodám motorku Suzuki GSX-R750 z roku 2014. Motorka je v dobrém stavu, má najeto 20 000 km. Barva je žlutá.",
+  "priceType": "price",
+  "type": "sell",
+  "owner": "6435ac1912fa44ccf013c722",
+  "address": {
+    "city": "Hořice",
+    "zipCode": "50801"
+  },
+  "createdOn": {
+    "$date": {
+      "$numberLong": "1681220875000"
+    }
+  },
+  "lastUpdate": {
+    "$date": {
+      "$numberLong": "1681220875000"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "6436ee3b6572cffc3c3b1725"
+  },
+  "name": "Kawasaki Ninja ZX-10R",
+  "price": 220000,
+  "description": "Prodám motorku Kawasaki Ninja ZX-10R z roku 2020. Motorka je v perfektním stavu, má najeto pouze 500 km. Barva je zelená.",
+  "priceType": "price",
+  "type": "sell",
+  "owner": "6435ac1912fa44ccf013c722",
+  "address": {
+    "city": "Hořice",
+    "zipCode": "50801"
+  },
+  "createdOn": {
+    "$date": {
+      "$numberLong": "1681226348000"
+    }
+  },
+  "lastUpdate": {
+    "$date": {
+      "$numberLong": "1681226348000"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "6436ee986572cffc3c3b1727"
+  },
+  "name": "Pánská kožená bunda",
+  "price": 3500,
+  "description": "Prodám pánskou koženou bundu značky Harley Davidson. Velikost L, výborný stav.",
+  "priceType": "price",
+  "type": "sell",
+  "owner": "6435ac1912fa44ccf013c722",
+  "address": {
+    "city": "Hořice",
+    "zipCode": "50801"
+  },
+  "createdOn": {
+    "$date": {
+      "$numberLong": "1681216245000"
+    }
+  },
+  "lastUpdate": {
+    "$date": {
+      "$numberLong": "1681216245000"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "6436ee986572cffc3c3b1728"
+  },
+  "name": "Hlásič zpětného chodu",
+  "price": 800,
+  "description": "Prodám hlásič zpětného chodu do motorky. Jednoduchá montáž, funkční.",
+  "priceType": "price",
+  "type": "sell",
+  "owner": "6435ac1912fa44ccf013c722",
+  "address": {
+    "city": "Hořice",
+    "zipCode": "50801"
+  },
+  "createdOn": {
+    "$date": {
+      "$numberLong": "1681218922000"
+    }
+  },
+  "lastUpdate": {
+    "$date": {
+      "$numberLong": "1681218922000"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "6436ee986572cffc3c3b1729"
+  },
+  "name": "Kvalitní motorkářské boty",
+  "price": 2000,
+  "description": "Prodám kvalitní motorkářské boty značky Alpinestars. Velikost 42, použité, ale v dobrém stavu.",
+  "priceType": "price",
+  "type": "sell",
+  "owner": "6435ac1912fa44ccf013c722",
+  "address": {
+    "city": "Hořice",
+    "zipCode": "50801"
+  },
+  "createdOn": {
+    "$date": {
+      "$numberLong": "1681224010000"
+    }
+  },
+  "lastUpdate": {
+    "$date": {
+      "$numberLong": "1681224010000"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "6436ee986572cffc3c3b172a"
+  },
+  "name": "Motorkářská helma",
+  "price": 2500,
+  "description": "Prodám motorkářskou helmu značky Shark. Velikost M, modrá barva, výborný stav.",
+  "priceType": "price",
+  "type": "sell",
+  "owner": "6435ac1912fa44ccf013c722",
+  "address": {
+    "city": "Hořice",
+    "zipCode": "50801"
+  },
+  "createdOn": {
+    "$date": {
+      "$numberLong": "1681228557000"
+    }
+  },
+  "lastUpdate": {
+    "$date": {
+      "$numberLong": "1681228557000"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "6436f29d6572cffc3c3b1730"
+  },
+  "name": "Kanapé",
+  "price": null,
+  "description": "Velké kožené kanapé, 3-sedadlové, tmavě hnědé barvy.",
+  "priceType": "free",
+  "type": "sell",
+  "owner": "6436f11d18c75e4cd3831e35",
+  "address": {
+    "city": "Chlumec nad Cidlinou",
+    "zipCode": "50351"
+  },
+  "createdOn": {
+    "$date": {
+      "$numberLong": "1681205841000"
+    }
+  },
+  "lastUpdate": {
+    "$date": {
+      "$numberLong": "1681205841000"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "6436f29d6572cffc3c3b1731"
+  },
+  "name": "Jídelní stůl",
+  "price": null,
+  "description": "Dřevěný jídelní stůl ideálně s čtyřmi židlemi. Pokud by byl rozkládací bude to ještě lepší.",
+  "priceType": "price",
+  "type": "buy",
+  "owner": "6436f11d18c75e4cd3831e35",
+  "address": {
+    "city": "Chlumec nad Cidlinou",
+    "zipCode": "50351"
+  },
+  "createdOn": {
+    "$date": {
+      "$numberLong": "1681208509000"
+    }
+  },
+  "lastUpdate": {
+    "$date": {
+      "$numberLong": "1681208509000"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "6436f29d6572cffc3c3b1732"
+  },
+  "name": "Komoda",
+  "price": 200,
+  "description": "Bílá komoda se čtyřmi šuplíky. Rozměry: 80 cm x 80 cm x 40 cm.",
+  "priceType": "offer",
+  "type": "sell",
+  "owner": "6436f11d18c75e4cd3831e35",
+  "address": {
+    "city": "Chlumec nad Cidlinou",
+    "zipCode": "50351"
+  },
+  "createdOn": {
+    "$date": {
+      "$numberLong": "1681211643000"
+    }
+  },
+  "lastUpdate": {
+    "$date": {
+      "$numberLong": "1681211643000"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "6436f29d6572cffc3c3b1733"
+  },
+  "name": "Postel",
+  "price": 3500,
+  "description": "Dvoulůžko s matrací. Rozměry: 160 cm x 200 cm. Rám postele je z černého kovu.",
+  "priceType": "price",
+  "type": "sell",
+  "owner": "6436f11d18c75e4cd3831e35",
+  "address": {
+    "city": "Chlumec nad Cidlinou",
+    "zipCode": "50351"
+  },
+  "createdOn": {
+    "$date": {
+      "$numberLong": "1681214712000"
+    }
+  },
+  "lastUpdate": {
+    "$date": {
+      "$numberLong": "1681214712000"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "6436f6a46572cffc3c3b1737"
+  },
+  "name": "Airsoftová pistole",
+  "price": 1200,
+  "description": "Prodám airsoftovou pistoli Tokyo Marui Hi-Capa 5.1. Nová, nepoužitá.",
+  "priceType": "price",
+  "type": "sell",
+  "owner": "6436f11d18c75e4cd3831e35",
+  "address": {
+    "city": "Chlumec nad Cidlinou",
+    "zipCode": "50351"
+  },
+  "createdOn": {
+    "$date": {
+      "$numberLong": "1681295143511"
+    }
+  },
+  "lastUpdate": {
+    "$date": {
+      "$numberLong": "1681208743511"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "6436f6a46572cffc3c3b1738"
+  },
+  "name": "Airsoftový granát",
+  "price": 400,
+  "description": "Prodám airsoftový granát TAGINN Pecker. Nepoužitý.",
+  "priceType": "price",
+  "type": "sell",
+  "owner": "6436f11d18c75e4cd3831e35",
+  "address": {
+    "city": "Chlumec nad Cidlinou",
+    "zipCode": "50351"
+  },
+  "createdOn": {
+    "$date": {
+      "$numberLong": "1681299441621"
+    }
+  },
+  "lastUpdate": {
+    "$date": {
+      "$numberLong": "1681213041621"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "6436f6a46572cffc3c3b1739"
+  },
+  "name": "Airsoftový zásobník",
+  "price": 200,
+  "description": "Prodám airsoftový zásobník pro zbraň Tokyo Marui Glock 17. Nový, nepoužitý.",
+  "priceType": "price",
+  "type": "sell",
+  "owner": "6436f11d18c75e4cd3831e35",
+  "address": {
+    "city": "Chlumec nad Cidlinou",
+    "zipCode": "50351"
+  },
+  "createdOn": {
+    "$date": {
+      "$numberLong": "1681305055923"
+    }
+  },
+  "lastUpdate": {
+    "$date": {
+      "$numberLong": "1681218655923"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "6436f6a46572cffc3c3b173a"
+  },
+  "name": "Airsoftová maska",
+  "price": 500,
+  "description": "Prodám airsoftovou masku s ochranou očí a dýchacích cest. Maska firmy Dye.",
+  "priceType": "price",
+  "type": "sell",
+  "owner": "6436f11d18c75e4cd3831e35",
+  "address": {
+    "city": "Chlumec nad Cidlinou",
+    "zipCode": "50351"
+  },
+  "createdOn": {
+    "$date": {
+      "$numberLong": "1681310733123"
+    }
+  },
+  "lastUpdate": {
+    "$date": {
+      "$numberLong": "1681224333123"
+    }
+  }
+}]
