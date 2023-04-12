@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
+// vytvoření schématu pro uživatele
 let UserModel = new Schema({
     username: {type: String, required: true},
     password: {type: String, required: true},
@@ -16,4 +17,5 @@ let UserModel = new Schema({
     _id: mongoose.Schema.Types.ObjectId
 });
 
+// export vytvořeného modelu ze schématu
 module.exports = mongoose.model('user', UserModel);

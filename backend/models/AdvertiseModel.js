@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
+// vytvoření schématu pro inzerát
 let AdvertiseModel = new Schema({
     name: {type: String, required: true},
     price: {type: Number, required: false},
@@ -17,4 +18,5 @@ let AdvertiseModel = new Schema({
     id: String
 });
 
+// export vytvořeného modelu
 module.exports = mongoose.model('advertise', AdvertiseModel);

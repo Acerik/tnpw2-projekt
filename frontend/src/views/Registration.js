@@ -115,8 +115,8 @@ function Registration() {
                     <Form.Group as={Col} className="mb-3">
                         <Form.Label>Uživatelské jméno:</Form.Label>
                         <Form.Control required type="text" placeholder="Zadejte uživatelské jméno:"
-                                      name="username" value={regState.username} onChange={handleChange}/>
-                        <Form.Control.Feedback type="invalid">Uživatelské jméno musí být zadáno.</Form.Control.Feedback>
+                                      name="username" minlength="3" value={regState.username} onChange={handleChange}/>
+                        <Form.Control.Feedback type="invalid">Uživatelské jméno musí být zadáno.. S minimální délkou 3 znaky.</Form.Control.Feedback>
                         <Form.Control.Feedback type="valid">Uživatelské jméno je zadáno.</Form.Control.Feedback>
                     </Form.Group>
                     <Form.Group as={Col} className="mb-3">
@@ -131,15 +131,15 @@ function Registration() {
                     <Form.Group as={Col} className="mb-3" controlId="formBasicPassword">
                         <Form.Label>Heslo:</Form.Label>
                         <Form.Control required type="password" placeholder="Zadejte heslo:"
-                                      name="password" value={regState.password} onChange={handleChange}/>
-                        <Form.Control.Feedback type="invalid">Heslo musí být zadáno.</Form.Control.Feedback>
+                                      name="password" minlength="4" value={regState.password} onChange={handleChange}/>
+                        <Form.Control.Feedback type="invalid">Heslo musí být zadáno. . S minimální délkou 4 znaků.</Form.Control.Feedback>
                         <Form.Control.Feedback type="valid">Heslo je zadáno.</Form.Control.Feedback>
                     </Form.Group>
                     <Form.Group as={Col} className="mb-3" controlId="formBasicConfirmPassword">
                         <Form.Label>Potvrdit heslo:</Form.Label>
                         <Form.Control required type="password" placeholder="Potvrďte heslo:"
-                                      name="confirmPassword" value={regState.confirmPassword} onChange={handleChange}/>
-                        <Form.Control.Feedback type="invalid">Potvrzující heslo musí být zadáno.</Form.Control.Feedback>
+                                      name="confirmPassword" minlength="4" value={regState.confirmPassword} onChange={handleChange}/>
+                        <Form.Control.Feedback type="invalid">Potvrzující heslo musí být zadáno. S minimální délkou 4 znaků.</Form.Control.Feedback>
                         <Form.Control.Feedback type="valid">Potvrzující heslo je zadáno.</Form.Control.Feedback>
                     </Form.Group>
                 </Row>
