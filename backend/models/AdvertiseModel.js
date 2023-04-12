@@ -2,17 +2,17 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 let AdvertiseModel = new Schema({
-    name: String,
-    price: Number,
-    priceType: String,
-    description: String,
-    type: String,
-    createdOn: Date,
-    lastUpdate: Date,
-    owner: String,
+    name: {type: String, required: true},
+    price: {type: Number, required: false},
+    priceType: {type: String, required: true},
+    description: {type: String, required: true},
+    type: {type: String, required: true},
+    createdOn: {type: Date, required: true},
+    lastUpdate: {type: Date, required: true},
+    owner: {type: String, required: true},
     address: {
-        city: String,
-        zipCode: String
+        city: {type: String, required: true},
+        zipCode: {type: String, required: true}
     },
     id: String
 });

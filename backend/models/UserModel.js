@@ -2,16 +2,16 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 let UserModel = new Schema({
-    username: String,
-    password: String,
-    email: String,
-    createdOn: Date,
-    firstName: String,
-    lastName: String,
-    phoneNumber: String,
+    username: {type: String, required: true},
+    password: {type: String, required: true},
+    email: {type: String, required: true},
+    createdOn: {type: Date, required: true},
+    firstName: {type: String, required: false},
+    lastName: {type: String, required: false},
+    phoneNumber: {type: String, required: false},
     address: {
-        zipCode: String,
-        city: String
+        zipCode: {type: String, required: false},
+        city: {type: String, required: false}
     },
     id: String
 });

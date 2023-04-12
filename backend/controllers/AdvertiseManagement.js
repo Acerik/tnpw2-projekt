@@ -55,7 +55,7 @@ exports.EditAdvertise = (userId, data, res) => {
 }
 
 exports.GetAdvertisesFromUser = (userId, res) => {
-    AdvertiseModel.find({owner: userId}).lean().then(advertises => {
+    AdvertiseModel.find({owner: userId}).sort({createdOn:1}).lean().then(advertises => {
         res.send(advertises);
     }).catch(err => {
         console.log(err);
@@ -73,7 +73,7 @@ exports.GetAdvertiseList = (page, res) => {
             page = maxPage;
         }
         let skip = perPage * (page - 1);
-        AdvertiseModel.find().skip(skip).limit(perPage).lean().then(advertises => {
+        AdvertiseModel.find().sort({createdOn:1}).skip(skip).limit(perPage).lean().then(advertises => {
             res.send({advertises, page, maxPage});
         }).catch(err => {
             console.log(err);
