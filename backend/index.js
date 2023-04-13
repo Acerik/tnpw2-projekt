@@ -43,8 +43,9 @@ app.use(sessions({
 }));
 // nastavení pro práci s cookies a cors policy kvůli axios dotazům na frontendu
 app.use(cookieParser());
+// IP adresa nastavena pro testování na mobilním zařízení na stejné síti
 app.use(cors({
-    origin: "http://localhost:3000",
+    origin: ["http://localhost:3000", "http://192.168.0.111:3000"],
     credentials: true
 }));
 // nastavení pro výstupy ve formátu json

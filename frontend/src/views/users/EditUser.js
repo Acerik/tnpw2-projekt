@@ -1,7 +1,7 @@
 import axios from "axios";
 import {BASE_URL, AxiosConfig} from "../../components/AxiosConfig";
 import React, {useState} from "react";
-import {Alert, Form, InputGroup, Button} from 'react-bootstrap';
+import {Alert, Form, InputGroup, Button, Row, Col, FormGroup} from 'react-bootstrap';
 import {useCookies} from 'react-cookie';
 
 function EditUser() {
@@ -156,22 +156,31 @@ function EditUser() {
                                   name="confirmPassword" value={userData.confirmPassword} onChange={handleChange}/>
                 </Form.Group>
                 <Form.Text as="h3">Nepovinné údaje</Form.Text>
-                <InputGroup className="mb-3">
-                    <InputGroup.Text>Křestní jméno</InputGroup.Text>
-                    <Form.Control aria-label="Křestní jméno" placeholder="Křestní jméno"
-                                  name="firstName" value={userData.firstName} onChange={handleChange}/>
-                    <InputGroup.Text>Příjmení</InputGroup.Text>
-                    <Form.Control aria-label="Příjmení" placeholder="Příjmení"
-                                  name="lastName" value={userData.lastName} onChange={handleChange}/>
-                </InputGroup>
-                <InputGroup className="mb-3">
-                    <InputGroup.Text>Obec</InputGroup.Text>
-                    <Form.Control aria-label="Obec" placeholder="Obec" name="address" sname="city"
-                                  value={userData.address.city} onChange={handleChange}/>
-                    <InputGroup.Text>PSČ</InputGroup.Text>
-                    <Form.Control aria-label="PSČ" placeholder="PSČ" name="address" sname="zipCode"
-                                  value={userData.address.zipCode} onChange={handleChange}/>
-                </InputGroup>
+                <Row>
+                    <FormGroup as={Col} className="mb-3">
+                        <InputGroup.Text>Křestní jméno</InputGroup.Text>
+                        <Form.Control aria-label="Křestní jméno" placeholder="Křestní jméno"
+                                      name="firstName" value={userData.firstName} onChange={handleChange}/>
+                    </FormGroup>
+                    <FormGroup as={Col} className="mb-3">
+                        <InputGroup.Text>Příjmení</InputGroup.Text>
+                        <Form.Control aria-label="Příjmení" placeholder="Příjmení"
+                                      name="lastName" value={userData.lastName} onChange={handleChange}/>
+                    </FormGroup>
+                </Row>
+                <Row>
+
+                    <FormGroup as={Col} className="mb-3">
+                        <InputGroup.Text>Obec</InputGroup.Text>
+                        <Form.Control aria-label="Obec" placeholder="Obec" name="address" sname="city"
+                                      value={userData.address.city} onChange={handleChange}/>
+                    </FormGroup>
+                    <FormGroup as={Col} className="mb-3">
+                        <InputGroup.Text>PSČ</InputGroup.Text>
+                        <Form.Control aria-label="PSČ" placeholder="PSČ" name="address" sname="zipCode"
+                                      value={userData.address.zipCode} onChange={handleChange}/>
+                    </FormGroup>
+                </Row>
                 <InputGroup className="mb-3">
                     <InputGroup.Text>Telefonní číslo</InputGroup.Text>
                     <Form.Control aria-label="Telefonní číslo" placeholder="Telefonní číslo" name="phoneNumber"

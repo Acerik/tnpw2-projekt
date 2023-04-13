@@ -22,3 +22,13 @@ div #content {
 .card {
   margin-top: 10px;
 }
+
+@media (max-device-width: 992px){
+  div #content {
+    padding-left: 1%;
+    padding-right: 1%;
+  }
+  textarea{
+    height: 150px;
+  }
+}
