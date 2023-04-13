@@ -8,61 +8,65 @@ import {useNavigate} from "react-router-dom";
 
 function NavbarMenu() {
 
+    // příprava proměnných
     const navigate = useNavigate();
     const [cookies, setCookie, removeCookie] = useCookies('userId');
     const [currentUser, setCurrentUser] = useState({
-        loading: true,
-        data: {
-            logged: false,
-            userId: ""
-        },
-        firstLoad: true
+        logged: false,
+        userId: ""
     });
 
+    // obsluha odhlášení
     function logout() {
+        // dotaz na odhlášení, kvůli smazání session
         axios.get(BASE_URL + "/logout", AxiosConfig).then(res => {
+            // zobrazení zprávy
             alert(res.data);
-            removeCookie('userId',{path: '/'});
+            // smazání cookies
+            removeCookie('userId', {path: '/'});
+            // obnova stránky
             navigate(0);
         }).catch(err => {
             console.log(err);
         });
     }
 
+    // kontrola zda je uživatel přihlášen
     axios.get(BASE_URL + "/logged-in", AxiosConfig).then(res => {
-        if(res.data.logged !== currentUser.data.logged) {
+        // pokud je stav přihlášení různý od backendu (session) dojde k aktualizaci
+        if (res.data.logged !== currentUser.logged) {
             setCurrentUser({
-                loading: false,
-                data:
-                    {
-                        logged: res.data.logged,
-                        userId: res.data.userId
-                    },
-                firstLoad: false
+                logged: res.data.logged,
+                userId: res.data.userId
             });
+            // aktualizace cookies
             setCookie('userId', res.data.userId, {path: '/'});
         }
     }).catch(err => {
         console.log(err);
     });
 
+    // vykreslení
     return (
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
             <Container>
+                {/*Zobrazení navbaru*/}
                 <Navbar.Brand href="/">Inzertní web</Navbar.Brand>
+                {/*Nastavení responzivity*/}
                 <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
                 <Navbar.Collapse id="responsive-navbar-nav">
-                    <Nav className="me-auto">
+                    <Nav className="me-auto"> {/*Levá část*/}
                         <Nav.Link href="/inzeraty/">Inzeráty</Nav.Link>
                     </Nav>
-                    {!currentUser.data.logged ? (
-                        <Nav>
+
+                    {!currentUser.logged ? (
+                        <Nav>{/*Pravá část, pokud uživatel není přihlášen */}
                             <Nav.Link href="/prihlaseni">Přihlásit</Nav.Link>
                             <Nav.Link href="/registrace">Registrace</Nav.Link>
                         </Nav>
                     ) : (
-                        <Nav>
-                            <Nav.Link href={"/uzivatel/" + currentUser.data.userId}>Můj profil</Nav.Link>
+                        <Nav>{/*Pravá část, pokud uživatel je přihlášen */}
+                            <Nav.Link href={"/uzivatel/" + currentUser.userId}>Můj profil</Nav.Link>
                             <Nav.Link href="/pridat-inzerat">Přidat inzerát</Nav.Link>
                             <Nav.Link onClick={logout}>Odhlásit</Nav.Link>
                         </Nav>

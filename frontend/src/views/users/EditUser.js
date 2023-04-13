@@ -5,6 +5,7 @@ import {Alert, Form, InputGroup, Button} from 'react-bootstrap';
 import {useCookies} from 'react-cookie';
 
 function EditUser() {
+    // příprava proměnných
     const [cookies] = useCookies('userId');
     const [firstLoad, setFirstLoad] = useState(true);
     const [hiddenError, setHiddenError] = useState(true);
@@ -22,22 +23,35 @@ function EditUser() {
         address: {
             zipCode: "",
             city: ""
-        }});
+        }
+    });
 
-    if(firstLoad){
+    // prvotní načtení
+    if (firstLoad) {
         setFirstLoad(false);
+        // dočasné nastavení pro axios, přidání id uživatele podle cookies
         let tempConfig = AxiosConfig;
-        tempConfig.params = {userId:cookies.userId};
+        tempConfig.params = {userId: cookies.userId};
+        // dotaz na backend
         axios.get(BASE_URL + '/edit-user', tempConfig).then(res => {
+            // uložení odpovědi
             setUserData(res.data);
         }).catch(err => {
             console.log(err);
         });
     }
 
-    const handleChange = e =>{
+    /**
+     * Univerzální metoda pro zpracování změn a jejich uložení do useState proměnné
+     * Element musí obsahovat atribut "name", který je shodný s názvem atributu v objektu uloženém v usestate
+     * Pokud je atribut v usestate objekt, pak je "name" název objektu a "sname" názvem atributu objektu
+     * */
+    const handleChange = e => {
+        // získání hodnoty a názvu atributu z elementu
         const {name, value} = e.target;
+        // získání sname atributu pokud je obsažen v elementu
         const sName = e.target.attributes.sname ? e.target.attributes.sname.value : null;
+        // výchozí stav
         let state = {
             email: "",
             username: "",
@@ -50,35 +64,47 @@ function EditUser() {
             address: {
                 zipCode: userData.address.zipCode,
                 city: userData.address.city
-            }};
-        for(const [key, currValue] of Object.entries(userData)){
-            if(key === name && currValue instanceof Object){
-                for(const [secondKey, secondCurrentValue] of Object.entries(currValue)){
-                    if(sName === secondKey){ // nová hodnota
+            }
+        };
+        // průchod dat z useState se získáním klíče a hodnoty
+        for (const [key, currValue] of Object.entries(userData)) {
+            // kontrola zda aktuální atribut je objekt (adresa)
+            if (key === name && currValue instanceof Object) {
+                // průchod poddruženého objektu
+                for (const [secondKey, secondCurrentValue] of Object.entries(currValue)) {
+                    // atribut v objektu je cílový atribut pro změnu
+                    if (sName === secondKey) {
                         state[key][secondKey] = value;
                     } else { // stará hodnota
                         state[key][secondKey] = secondCurrentValue;
                     }
                 }
             }
-            if(key !== name && !(currValue instanceof Object)){
-                state[key] = currValue;
-            } else if (!(currValue instanceof Object)){
-                state[name] = value;
+            // kontrola zda se nejedná o objekt a zda se nejedná o hledaný atribut
+            if (key !== name && !(currValue instanceof Object)) {
+                state[key] = currValue; // zachování staré hodnoty
+            } else if (!(currValue instanceof Object)) {
+                state[name] = value; // nastavení nové hodnoty
             }
         }
+        // uložení do useState
         setUserData(state);
     }
 
-    function onSubmit(e){
+    // obsluha potvrzení formuláře
+    function onSubmit(e) {
+        // zamezení obnovení stránky
         e.preventDefault();
+        // dotaz s novými údaji
         axios.put(BASE_URL + '/edit-user', userData, AxiosConfig).then(res => {
-            if(Array.isArray(res.data)){
+            // pokud jsou vráceny chyby dojde k jejich zobrazení
+            if (Array.isArray(res.data)) {
                 let element = document.getElementById("errors-p");
                 element.innerHTML = res.data.join("<br>");
                 setHiddenError(false);
                 setHiddenSuccess(true);
             } else {
+                // zobrazení zprávy o úspěšném provedení
                 let element = document.getElementById("success-p");
                 element.innerHTML = res.data;
                 setHiddenError(true);
@@ -89,16 +115,20 @@ function EditUser() {
         });
     }
 
+    // vykreslení
     return (
         <div id='content'>
-            <Alert hidden={hiddenError} variant="danger" onClose={()=>setHiddenError(true)} dismissible>
+            {/*Příprava pro zobrazení chyb*/}
+            <Alert hidden={hiddenError} variant="danger" onClose={() => setHiddenError(true)} dismissible>
                 <Alert.Heading>Chyby při úpravě profilu</Alert.Heading>
-                <p id="errors-p"> </p>
+                <p id="errors-p"></p>
             </Alert>
-            <Alert hidden={hiddenSuccess} variant="success" onClose={()=>setHiddenSuccess(true)} dismissible>
+            {/*Příprava pro zobrazení úspěchu*/}
+            <Alert hidden={hiddenSuccess} variant="success" onClose={() => setHiddenSuccess(true)} dismissible>
                 <Alert.Heading>Úprava profilu uložena.</Alert.Heading>
-                <p id="success-p"> </p>
+                <p id="success-p"></p>
             </Alert>
+            {/*Samotný formulář*/}
             <Form onSubmit={onSubmit}>
                 <Form.Group className="mb-3" controlId="formBasicUsername">
                     <Form.Label>Uživatelské jméno:</Form.Label>

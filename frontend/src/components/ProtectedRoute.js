@@ -9,16 +9,19 @@ import React from 'react';
  * @param alternativePath String, slouží jako alternativní cesta pokud není splněna autorizace na základě požadavků
  * */
 export const ProtectedRoute = ({childrenRoute, mustBeLogged, alternativePath}) => {
+    // získání id uživatele z cookies a ověření zda obsahuje validní hodnotu
     const [cookies] = useCookies('userId');
     let userLogged = (cookies.userId === undefined) ? false : cookies.userId.length > 9;
+    // pokud uživatel musí být přihlášen ale není dojde k přesměrování na alternativní cestu
     if(mustBeLogged && !userLogged){
         alternativePath = alternativePath ? alternativePath : "";
         return <Navigate to={alternativePath}/>
     }
-    console.log(!mustBeLogged && userLogged);
+    // pokud uživatel nesmí být přihlášen ale je dojde k přesměrování na alternativní cestu
     if(!mustBeLogged && userLogged){
         alternativePath = alternativePath ? alternativePath : "";
         return <Navigate to={alternativePath}/>
     }
+    // přesměrování na zabezpečenou komponentu
     return childrenRoute;
 };
