@@ -13,8 +13,7 @@ let UserModel = new Schema({
     address: {
         zipCode: {type: String, required: false},
         city: {type: String, required: false}
-    },
-    _id: mongoose.Schema.Types.ObjectId
+    }
 });
 
 // export vytvořeného modelu ze schématu

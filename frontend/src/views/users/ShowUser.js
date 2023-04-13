@@ -5,10 +5,12 @@ import {Alert, Card} from 'react-bootstrap';
 import {useParams} from "react-router";
 import {useCookies} from "react-cookie";
 import moment from "moment";
+import {useNavigate} from "react-router-dom";
 
 function ShowUser() {
     // příprava proměnných a získání parametru userId pro zobrazení uživatele
     const userId = useParams().userId;
+    const navigate = useNavigate();
     const priceTypes = {"free": "Zdarma", "offer": "Dohodou"};
     const advertiseTypes = {"buy": "Koupím", "sell": "Prodám"};
     const [cookies] = useCookies('userId');
@@ -52,10 +54,16 @@ function ShowUser() {
         tempConfig.params = {userId};
         // dotaz na backend
         axios.get(BASE_URL + '/get-user', tempConfig).then(res => {
-            // nastavení dat
-            setUserData(res.data);
-            // pokud je uživatel přihlášen kontrola, zda se nejedná o profil přihlášeného uživatele
-            setMyProfile(cookies.userId === res.data._id);
+            // data neobsahují chyby
+            if(!Array.isArray(res.data)) {
+                // nastavení dat
+                setUserData(res.data);
+                // pokud je uživatel přihlášen kontrola, zda se nejedná o profil přihlášeného uživatele
+                setMyProfile(cookies.userId === res.data._id);
+            } else {
+                alert(res.data.join(" "));
+                navigate(-1);
+            }
         }).catch(err => {
             console.log(err);
         });
@@ -178,14 +186,14 @@ function ShowUser() {
                                         : ""}
                                 </Card.Body>
                                 {/*Zobrazení času přidání případně i času poslední úpravy pokud byl inzerát upraven*/}
-                                <Card.Footer className="text-muted">Přidáno: {formatDate(advertise.createdOn)}</Card.Footer>
+                                <Card.Footer
+                                    className="text-muted">Přidáno: {formatDate(advertise.createdOn)}</Card.Footer>
                                 {advertise.createdOn === advertise.lastUpdate ? null :
                                     <Card.Footer className="text-muted">Poslední
                                         úprava: {formatDate(advertise.lastUpdate)}</Card.Footer>
                                 }
                             </Card>
-                        );
-                    })}
+                        );})}
                 </Card.Body>
             </Card>
         </div>

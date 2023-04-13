@@ -41,7 +41,12 @@ function ShowAdvertise() {
         tempConfig.params = {advertiseId};
         // dotaz na backend
         axios.get(BASE_URL + "/get-advertise", tempConfig).then(res => {
-            setAdvertiseData(res.data);
+            if(!Array.isArray(res.data)) {
+                setAdvertiseData(res.data);
+            } else {
+                alert(res.data.join(" "));
+                navigate(-1);
+            }
         }).catch(err => {
             console.log(err);
         });

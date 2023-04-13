@@ -1,6 +1,6 @@
 import './App.css';
 import React from 'react';
-import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+import {BrowserRouter as Router, Navigate, Route, Routes} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Registration from './views/Registration';
 import Login from './views/Login';
@@ -41,6 +41,9 @@ function App() {
                     <ProtectedRoute childrenRoute={<Login/>} mustBeLogged={false} alternativePath={"/uzivatel/" + cookies.userId}/>}/>
                 <Route path='/registrace' element={
                     <ProtectedRoute childrenRoute={<Registration/>} mustBeLogged={false} alternativePath={"/uzivatel/" + cookies.userId}/>}/>
+
+                {/*Výchozí cesta pro nevyužité možnosti*/}
+                <Route path='*' element={<Navigate to={'/'}/>}/>
             </Routes>
         </Router>
     );

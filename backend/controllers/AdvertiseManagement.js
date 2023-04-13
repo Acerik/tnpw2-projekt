@@ -56,6 +56,7 @@ exports.AddAdvertise = (userId, data, res) => {
     advertiseToAdd.save().then((saved) => {
         res.send({message: "Uloženo", data: saved});
     }).catch(err => {
+        res.send(["Chyba při ukládání do databáze. Kontaktujte správce."]);
         console.log(err);
     });
 }
@@ -73,10 +74,13 @@ exports.GetAdvertiseToShow = (advertiseId, res) => {
             // přidání uživatelského jména k datům k odeslání
             advertiseFind.ownerName = userFind.username;
             res.send(advertiseFind);
+        }).catch(err2 => {
+            console.log(err2);
+            res.send(["Autor k článku nebyl nalezen."]);
         });
     }).catch(err => {
         console.log(err);
-        res.send("ERROR");
+        res.send(["Článek nebyl v databázi nalezen."]);
     });
 }
 
@@ -92,11 +96,11 @@ exports.GetAdvertiseEdit = (data, res) => {
         if (data.userId === advertiseFind.owner) {
             res.send(advertiseFind);
         } else {
-            //not own the advertise
             res.send(["Nejste autorem tohoto inzerátu."]);
         }
     }).catch(err => {
         console.log(err);
+        res.send(["Chyba při načítání z databáze. Kontaktujte správce."]);
     });
 }
 
@@ -115,12 +119,16 @@ exports.EditAdvertise = (userId, data, res) => {
             data.lastUpdate = Date.now();
             AdvertiseModel.findByIdAndUpdate(data._id, data).then(updateResult => {
                 res.send("Inzerát byl upraven.");
+            }).catch(errUpdate => {
+                console.log(errUpdate);
+                res.send(["Chyba při ukládání do databáze. Kontaktujte správce."]);
             });
         } else {
             res.send(["Uživatel autorem inzerátu, úprava tedy není možná"]);
         }
     }).catch(err => {
         console.log(err);
+        res.send(["Chyba při načítání z databáze. Kontaktujte správce."]);
     });
 }
 
@@ -135,6 +143,7 @@ exports.GetAdvertisesFromUser = (userId, res) => {
         res.send(advertises);
     }).catch(err => {
         console.log(err);
+        res.send(["Chyba při načítání z databáze."]);
     });
 }
 
@@ -166,9 +175,11 @@ exports.GetAdvertiseList = (page, res) => {
             res.send({advertises, page, maxPage});
         }).catch(err => {
             console.log(err);
+            res.send(["Chyba při načítání z databáze. Kontaktujte správce."]);
         });
     }).catch(err => {
         console.log(err);
+        res.send(["Chyba při načítání z databáze. Kontaktujte správce."]);
     });
 }
 

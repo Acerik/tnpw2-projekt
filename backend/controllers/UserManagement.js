@@ -84,6 +84,7 @@ exports.Registration = async (data, res) => {
                             res.send("ok");
                     }).catch((err) => {
                         console.log(err);
+                        res.send(["Chyba při ukládání do databáze. Kontaktujte správce."]);
                     });
                 } else {
                     // odeslání chyb
@@ -96,6 +97,9 @@ exports.Registration = async (data, res) => {
             errors.push("Uživatelské jméno je již obsazeno.");
             res.send(errors);
         }
+    }).catch(err=>{
+        console.log(err);
+        res.send(["Chyba při načítání z databáze. Kontaktujte správce."]);
     });
 }
 
@@ -129,6 +133,9 @@ exports.Login = (data, res, req) => {
             errors.push("Uživatel s tímto emailem nebyl nalezen.");
             res.send(errors);
         }
+    }).catch(err=>{
+        console.log(err);
+        res.send(["Chyba při načítání z databáze. Kontaktujte správce."]);
     });
 }
 
@@ -144,6 +151,7 @@ exports.GetUser = (userId, res) => {
         res.send(user);
     }).catch(err=> {
         console.log(err);
+        res.send(["Uživatel nebyl nalezen."]);
     });
 }
 
@@ -197,8 +205,10 @@ exports.EditUser = async (data, res) => {
             res.send("Úprava byla provedena.");
         }).catch(err => {
             console.log(err);
+            res.send(["Chyba při ukládání do databáze. Kontaktujte správce."]);
         });
     }).catch(err => {
         console.log(err);
+        res.send(["Chyba při načítání z databáze. Kontaktujte správce."]);
     });
 }

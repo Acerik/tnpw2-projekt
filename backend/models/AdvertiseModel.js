@@ -14,8 +14,7 @@ let AdvertiseModel = new Schema({
     address: {
         city: {type: String, required: true},
         zipCode: {type: String, required: true}
-    },
-    id: String
+    }
 });
 
 // export vytvořeného modelu
