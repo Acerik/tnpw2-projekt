@@ -3,6 +3,9 @@ const UserModel = require('../models/UserModel');
 const fs = require("fs");
 const mongoose = require("mongoose");
 
+// řazení od nejstarších
+const defaultSortCreatedOn = 1;
+
 /**
  * Slouží k načtení uživatelů z Json souboru ze zadané cesty a uložení do databáze.
  * @param path Cesta k JSON souboru s předdefinovanými uživateli do databáze.
@@ -139,7 +142,7 @@ exports.EditAdvertise = (userId, data, res) => {
  * */
 exports.GetAdvertisesFromUser = (userId, res) => {
     //vyhledání podle id a seřazení podle času
-    AdvertiseModel.find({owner: userId}).sort({createdOn:1}).lean().then(advertises => {
+    AdvertiseModel.find({owner: userId}).sort({createdOn:defaultSortCreatedOn}).lean().then(advertises => {
         res.send(advertises);
     }).catch(err => {
         console.log(err);
@@ -148,39 +151,65 @@ exports.GetAdvertisesFromUser = (userId, res) => {
 }
 
 /**
- * Metoda slouží k návratu inzerátů do listu podle zadané stránky
+ * Metoda slouží k návratu inzerátů do listu podle případně zadané stránky a hledaného textu
  * @param page Číslo stránky pro kterou se mají zobrazit inzeráty
+ * @param search Text pro výhledávání inzerátů
  * @param res Objekt sloužící k odeslání odpovědi na požadavek
  * */
-exports.GetAdvertiseList = (page, res) => {
+exports.GetAdvertiseList = (page, search, res) => {
     // omezení počtu inzerátů na stránku, v konstantě z důvodu případné rozšířitelnosti na variabilní počet
     const perPage = 20;
     // kontrola zda byla stránka zadána případně vložena na výchozí hodnotu 1
     if (!page || page < 1) {
         page = 1;
     }
-    // zjištění počtu inzerátů v databázi
-    AdvertiseModel.countDocuments().then(numberOfDocuments => {
-        // výpočet maximálni hodnoty pro číslo stránky
-        let maxPage = Math.ceil(numberOfDocuments / perPage);
-        // kontrola zda není stránka větší nežli maximum případně úprava stránky
-        if (page > maxPage) {
-            page = maxPage;
-        }
-        // výpočet počtu inzerátů, které se mají přeskočit
-        let skip = perPage * (page - 1);
-        // vyhledání inzerátů s limitem podle počtu na stránku a přeskočením předchozích
-        AdvertiseModel.find().sort({createdOn:1}).skip(skip).limit(perPage).lean().then(advertises => {
-            // odeslání inzerátů včetně stránky a maximální hodnoty pro číslo stránky
-            res.send({advertises, page, maxPage});
+    // rozdělení zda se má vyhledávat nebo ne
+    // dělení je zachováno z důvodů vyzkoušení více možností jak "vyseknout" potřebnou část ze všech inzerátů
+    if(search !== "false"){
+        // vyhledávání s využitím regexu z mongodb najde zadaný text v atributu name
+        // není case sensitive a zahrne inzeráty kde je hledaný text pouze částí názvu
+        AdvertiseModel.find({name: {"$regex": search, "$options":"i"}})
+            .sort({createdOn:defaultSortCreatedOn}).lean().then(searchedAdvertises=> {
+            if(!searchedAdvertises || searchedAdvertises.length === 0){
+                // nebyl nalezen žádný inzerát
+                res.send(["Žádný inzerát obsahující v názvu: " + search + " nebyl nalezen."]);
+                return;
+            }
+            // výpočet maximální možné stránky, přeskočení atd
+            let maxPage = Math.ceil(searchedAdvertises.length/perPage);
+            page = page > maxPage ? maxPage : page;
+            let skip = perPage * (page-1);
+            // výběr pouze potřebných dat ze všech
+            searchedAdvertises = searchedAdvertises.slice(skip, (skip+perPage));
+            // odeslání
+            res.send({advertises: searchedAdvertises, page: page, maxPage: maxPage});
+        }).catch(err=> {
+            console.log(err);
+        });
+    } else {
+        // zjištění počtu inzerátů v databázi
+        AdvertiseModel.countDocuments().then(numberOfDocuments => {
+            // výpočet maximálni hodnoty pro číslo stránky
+            let maxPage = Math.ceil(numberOfDocuments / perPage);
+            // kontrola zda není stránka větší nežli maximum případně úprava stránky
+            if (page > maxPage) {
+                page = maxPage;
+            }
+            // výpočet počtu inzerátů, které se mají přeskočit
+            let skip = perPage * (page - 1);
+            // vyhledání inzerátů s limitem podle počtu na stránku a přeskočením předchozích
+            AdvertiseModel.find().sort({createdOn: defaultSortCreatedOn}).skip(skip).limit(perPage).lean().then(advertises => {
+                // odeslání inzerátů včetně stránky a maximální hodnoty pro číslo stránky
+                res.send({advertises, page, maxPage});
+            }).catch(err => {
+                console.log(err);
+                res.send(["Chyba při načítání z databáze. Kontaktujte správce."]);
+            });
         }).catch(err => {
             console.log(err);
             res.send(["Chyba při načítání z databáze. Kontaktujte správce."]);
         });
-    }).catch(err => {
-        console.log(err);
-        res.send(["Chyba při načítání z databáze. Kontaktujte správce."]);
-    });
+    }
 }
 
 /**

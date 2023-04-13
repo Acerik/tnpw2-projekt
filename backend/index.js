@@ -160,9 +160,9 @@ app.delete('/api/delete-advertise', (req, res) => {
         res.send(["Uživatel není přihlášen. Pro tento krok, je nutné se první přihlásit."]);
     }
 });
-// get pro získání stránky s inzeráty
+// get pro získání stránky s inzeráty, lze vyhledávat a lze stránkovat
 app.get('/api/get-advertise-list', (req, res) => {
-    AdvertiseManagement.GetAdvertiseList(req.query.page, res);
+    AdvertiseManagement.GetAdvertiseList(req.query.page, req.query.search, res);
 });
 // get pro získání uživatele pro zobrazení
 app.get('/api/get-user', (req, res) => {

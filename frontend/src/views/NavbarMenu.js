@@ -1,19 +1,36 @@
 import React, {useState} from 'react';
-import {Navbar, Container, Nav} from 'react-bootstrap';
+import {Navbar, Container, Nav, Form} from 'react-bootstrap';
 import axios from 'axios';
 import {BASE_URL, AxiosConfig} from "../components/AxiosConfig";
 import {useCookies} from 'react-cookie';
-import {useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router";
 
 
 function NavbarMenu() {
 
     // příprava proměnných
     const navigate = useNavigate();
+    // může zobrazi chybu, že cookies nejsou použity, pokud se však smažou není možné využít setCookie
     const [cookies, setCookie, removeCookie] = useCookies('userId');
     const [currentUser, setCurrentUser] = useState({
         logged: false,
         userId: ""
+    });
+
+    const [searchText, setSearchText] = useState("");
+    // kontrola zda je uživatel přihlášen
+    axios.get(BASE_URL + "/logged-in", AxiosConfig).then(res => {
+        // pokud je stav přihlášení různý od backendu (session) dojde k aktualizaci
+        if (res.data.logged !== currentUser.logged) {
+            setCurrentUser({
+                logged: res.data.logged,
+                userId: res.data.userId
+            });
+            // aktualizace cookies
+            setCookie('userId', res.data.userId, {path: '/'});
+        }
+    }).catch(err => {
+        console.log(err);
     });
 
     // obsluha odhlášení
@@ -31,20 +48,15 @@ function NavbarMenu() {
         });
     }
 
-    // kontrola zda je uživatel přihlášen
-    axios.get(BASE_URL + "/logged-in", AxiosConfig).then(res => {
-        // pokud je stav přihlášení různý od backendu (session) dojde k aktualizaci
-        if (res.data.logged !== currentUser.logged) {
-            setCurrentUser({
-                logged: res.data.logged,
-                userId: res.data.userId
-            });
-            // aktualizace cookies
-            setCookie('userId', res.data.userId, {path: '/'});
+    //obsluha vyhledávání
+    function search(e){
+        e.preventDefault();
+        if(searchText.trim()){
+            console.log(searchText);
+            navigate('/inzeraty/hledat/'+searchText.trimStart().trimEnd());
+            navigate(0);
         }
-    }).catch(err => {
-        console.log(err);
-    });
+    }
 
     // vykreslení
     return (
@@ -57,6 +69,11 @@ function NavbarMenu() {
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto"> {/*Levá část*/}
                         <Nav.Link href="/inzeraty/">Inzeráty</Nav.Link>
+                        <Form className="d-flex" onSubmit={search}>
+                            <Form.Control type="search" placeholder="Vyhledat inzerát" className="me-2"
+                                          aria-label="Vyhledat inzerát" value={searchText} onChange={e=>setSearchText(e.target.value)}/>
+                            <Nav.Link href={""} onClick={search}>Vyhledat</Nav.Link>
+                        </Form>
                     </Nav>
 
                     {!currentUser.logged ? (

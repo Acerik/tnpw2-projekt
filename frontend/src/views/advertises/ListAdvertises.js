@@ -10,6 +10,8 @@ function ListAdvertises(){
     // příprava proměnných, získání čísla stránky, pokud není obsaženo doplní se 1
     const navigate = useNavigate();
     const [page, setPage] = useState(Number(useParams().page ? useParams().page : 1));
+    const [searchText] = useState(useParams().search ? useParams().search : false);
+    const [searchError, setSearchError] = useState(false);
     const [maxPage, setMaxPage] = useState(Number(page)+1);
     const [firstLoad, setFirstLoad] = useState(true);
     const priceTypes = {"free": "Zdarma", "offer": "Dohodou"};
@@ -35,21 +37,31 @@ function ListAdvertises(){
         setFirstLoad(false);
         // dočasné nastavení pro dotaz axiosu, přidáním parametru s aktuální stránkou
         let tempConfig = AxiosConfig;
-        tempConfig.params = {page};
+        tempConfig.params = {page: page, search: searchText};
         axios.get(BASE_URL + '/get-advertise-list', tempConfig).then(res => {
-            // kontrola zda je aktuální číslo stránky rozdílné od obdrženého čísla stránky
-            // pokud by uživatel zadal např stránku 20 a maximum by bylo 4, pak backend vrátí stránku 4 jako aktuální
-            if(Number(res.data.page) !== Number(page)){
-                // nastavení a přesměrování na novou stránku
-                setPage(Number(res.data.page));
-                navigate('/inzeraty/'+res.data.page);
+            // kontrola zda neobsahuje výsledek chyby
+            if(Array.isArray(res.data)){
+                setSearchError(res.data);
+            } else {
+                // kontrola zda je aktuální číslo stránky rozdílné od obdrženého čísla stránky
+                // pokud by uživatel zadal např stránku 20 a maximum by bylo 4, pak backend vrátí stránku 4 jako aktuální
+                if (Number(res.data.page) !== Number(page)) {
+                    // nastavení a přesměrování na novou stránku
+                    setPage(Number(res.data.page));
+                    navigate((searchText === false) ? ('/inzeraty/' + res.data.page) : '/inzeraty/hledat/' + searchText + '/' + res.data.page);
+                }
+                // nastavení inzerátů a maximálního možného čísla pro stránku
+                setAdvertises(res.data.advertises);
+                setMaxPage(Number(res.data.maxPage));
             }
-            // nastavení inzerátů a maximálního možného čísla pro stránku
-            setAdvertises(res.data.advertises);
-            setMaxPage(Number(res.data.maxPage));
         }).catch(err => {
             console.log(err);
         });
+    }
+
+    // vytvoření odkazu pro stránkování podle zadané stránky, řeší problém s možným vyhledáváním
+    function navigateHref(nPage){
+        return ((searchText === false) ? ('/inzeraty/'+nPage) : '/inzeraty/hledat/'+searchText+'/'+nPage);
     }
 
     // formátování pro datumy s časem do čitelné podoby
@@ -59,8 +71,10 @@ function ListAdvertises(){
 
     return (
         <div id='content'>
-            {/*Průchod inzerátů po jednom pomocí mapování*/}
-            {advertises.map(advertise => {
+            {searchText?<h4>Výsledky pro hledání: {searchText}</h4>:""}
+            {/*Průchod inzerátů po jednom pomocí mapování, pokud však výsledek pro vyhledání nebyl prázdný*/}
+            {searchError !== false ? <p>{searchError.join("<br>")}</p>:
+                advertises.map(advertise => {
                 return (
                     <Card key={advertise._id}>
                         <Card.Body>
@@ -87,30 +101,30 @@ function ListAdvertises(){
                     </Card>
                 );
             })}
-            {/*Stránkování inzerátů*/}
-            <Pagination className="justify-content-center">
+            {/*Stránkování inzerátů, zůstane skryto pokud se vyhledává a nebyl nalezen žádný výsledek*/}
+            <Pagination className="justify-content-center" hidden={searchError !== false}>
                 {/*První stránka (<<), nezobrazí se pokud je aktuální stránka 1*/}
-                <Pagination.First href={"/inzeraty/1"} hidden={page === 1}/>
+                <Pagination.First href={navigateHref(1)} hidden={page === 1}/>
                 {/*Předchozí stránka (<), nezobrazí se pokud je aktuální stránka 1*/}
-                <Pagination.Prev href={"/inzeraty/" + Number(page-1)} hidden={page === 1}/>
+                <Pagination.Prev href={navigateHref(Number(page-1))} hidden={page === 1}/>
                 {/*První stránka (1) nezobrazí se pokud je stránka 1*/}
-                <Pagination.Item href={"/inzeraty/1"} hidden={page === 1}>{1}</Pagination.Item>
+                <Pagination.Item href={navigateHref(1)} hidden={page === 1}>{1}</Pagination.Item>
                 {/*Zobrazení teček, dojde k zobrazení pokud jsou mezi aktuální a první stránkou minimálně 2 stránky*/}
                 <Pagination.Ellipsis disabled={true} hidden={(page === 1) || (page === 2) || (2 === page - 1) || (page - 1 === maxPage)}/>
                 {/*Zobrazení stránky o jedna menší nežli je aktuální, nedojde k zobrazení pokud je stránka první případně druhá*/}
-                <Pagination.Item href={"/inzeraty/" + Number(page-1)} hidden={(page - 1 === 1) || (page === 1)}>{page-1}</Pagination.Item>
+                <Pagination.Item href={navigateHref(Number(page-1))} hidden={(page - 1 === 1) || (page === 1)}>{page-1}</Pagination.Item>
                 {/*Zbrazení aktuální stránky*/}
                 <Pagination.Item active>{page}</Pagination.Item>
                 {/*Zobrazení následující stránky, nezobrazí se pokud je následující stránky maximální možná*/}
-                <Pagination.Item href={"/inzeraty/" + Number(page+1)} hidden={(page + 1 === maxPage) || (page === maxPage)}>{page+1}</Pagination.Item>
+                <Pagination.Item href={navigateHref(Number(page+1))} hidden={(page + 1 === maxPage) || (page === maxPage)}>{page+1}</Pagination.Item>
                 {/*Zobrazení teček, nezobrazí se pokud mezi aktuální a maximální stránkou nejsou alespoň 2 možné*/}
                 <Pagination.Ellipsis disabled={true} hidden={(maxPage === page) || (page + 2 === maxPage) ||  (maxPage === page+1)}/>
                 {/*Zobrazení maximální stránky číslem, nezobrazí se pokud je aktuální stránka maximální možná*/}
-                <Pagination.Item href={"/inzeraty/" + maxPage} hidden={maxPage === page}>{maxPage}</Pagination.Item>
+                <Pagination.Item href={navigateHref(maxPage)} hidden={maxPage === page}>{maxPage}</Pagination.Item>
                 {/*Následující stránka (>), nezobrazí se pokud je aktuální stránka poslední možná*/}
-                <Pagination.Next href={"/inzeraty/" + Number(page+1)} hidden={maxPage === page}/>
+                <Pagination.Next href={navigateHref(Number(page+1))} hidden={maxPage === page}/>
                 {/*Poslední stránka (>>), nezobrazí se pokud je aktuální stránka poslední možná*/}
-                <Pagination.Last href={"/inzeraty/" + maxPage} hidden={maxPage === page}/>
+                <Pagination.Last href={navigateHref(maxPage)} hidden={maxPage === page}/>
             </Pagination>
         </div>
     )
