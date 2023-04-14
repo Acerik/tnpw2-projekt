@@ -138,4 +138,24 @@
     "city": "Chlumec nad Cidlinou"
   },
   "__v": 0
+},{
+  "_id": {
+    "$oid": "6438429b2dfbbc7b07b7b336"
+  },
+  "username": "nemaminzeraty",
+  "password": "$2b$10$.2IDdnDJQQrLgPC/MvB2rurfcKqRg6vNfUu/TmzrgPFi0gqsdidbq",
+  "email": "random8@random.cz",
+  "createdOn": {
+    "$date": {
+      "$numberLong": "1681408667340"
+    }
+  },
+  "firstName": "",
+  "lastName": "",
+  "phoneNumber": "",
+  "address": {
+    "zipCode": "",
+    "city": ""
+  },
+  "__v": 0
 }]

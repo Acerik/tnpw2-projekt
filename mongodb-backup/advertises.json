@@ -5,11 +5,11 @@
   "name": "Jízdní kolo",
   "price": null,
   "priceType": "offer",
-  "description": "Prodám jízdní kolo\nKolo bylo zakoupeno 2020 v zimě, nebylo téměř využito díky covidu a aktuálně můj zdravotní stav není vhodný pro jízdu na kole",
+  "description": "Prodám jízdní kolo\nKolo bylo zakoupeno 2020 v zimě, nebylo téměř využito díky covidu a aktuálně můj zdravotní stav není vhodný pro jízdu na kole\nSleva možná ",
   "type": "sell",
   "address": {
-    "city": "Hradec Králové",
-    "zipCode": "500 02"
+    "zipCode": "500 02",
+    "city": "Hradec Králové"
   },
   "owner": "641b4f911eb2d920be5d470b",
   "createdOn": {
@@ -19,7 +19,7 @@
   },
   "lastUpdate": {
     "$date": {
-      "$numberLong": "1681250156450"
+      "$numberLong": "1681428564463"
     }
   },
   "__v": 0
@@ -1388,7 +1388,7 @@
   },
   "lastUpdate": {
     "$date": {
-      "$numberLong": "1681208743511"
+      "$numberLong": "1681295143511"
     }
   }
 },{
@@ -1412,7 +1412,7 @@
   },
   "lastUpdate": {
     "$date": {
-      "$numberLong": "1681213041621"
+      "$numberLong": "1681299441621"
     }
   }
 },{
@@ -1436,7 +1436,7 @@
   },
   "lastUpdate": {
     "$date": {
-      "$numberLong": "1681218655923"
+      "$numberLong": "1681305055923"
     }
   }
 },{
@@ -1460,7 +1460,7 @@
   },
   "lastUpdate": {
     "$date": {
-      "$numberLong": "1681224333123"
+      "$numberLong": "1681310733123"
     }
   }
 }]

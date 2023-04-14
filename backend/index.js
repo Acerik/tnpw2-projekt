@@ -43,7 +43,12 @@ app.use(sessions({
 }));
 // nastavení pro práci s cookies a cors policy kvůli axios dotazům na frontendu
 app.use(cookieParser());
-// IP adresa nastavena pro testování na mobilním zařízení na stejné síti
+/*
+ * IP adresa nastavena pro testování na mobilním zařízení na stejné síti
+ * pro spuštění pouze na localhost stačí localhost:3000
+ * nutné nastavit IP adresu nebo localhost v AxiosConfig na frontendu v BASE_URL, pro testování na stejné wifi
+ * IP adresa musí odpovídat adrese zařízení kde je server spuštěn.
+ **/
 app.use(cors({
     origin: ["http://localhost:3000", "http://192.168.0.111:3000"],
     credentials: true

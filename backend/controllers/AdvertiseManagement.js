@@ -72,18 +72,18 @@ exports.AddAdvertise = (userId, data, res) => {
 exports.GetAdvertiseToShow = (advertiseId, res) => {
     // vyhledání inzerátu podle id
     AdvertiseModel.findById(advertiseId).lean().then((advertiseFind) => {
-        // vyhledání uživatele podle majitele článku
+        // vyhledání uživatele podle majitele inzerátu
         UserModel.findById(advertiseFind.owner).lean().then(userFind => {
             // přidání uživatelského jména k datům k odeslání
             advertiseFind.ownerName = userFind.username;
             res.send(advertiseFind);
         }).catch(err2 => {
             console.log(err2);
-            res.send(["Autor k článku nebyl nalezen."]);
+            res.send(["Autor k inzerátu nebyl nalezen."]);
         });
     }).catch(err => {
         console.log(err);
-        res.send(["Článek nebyl v databázi nalezen."]);
+        res.send(["Inzerát nebyl v databázi nalezen."]);
     });
 }
 
@@ -136,8 +136,8 @@ exports.EditAdvertise = (userId, data, res) => {
 }
 
 /**
- * Metoda slouží k vyhledání článku pro konkrétního uživatele.
- * @param userId Id uživatele pro kterého se mají články vyhledat
+ * Metoda slouží k vyhledání inzerátů pro konkrétního uživatele.
+ * @param userId Id uživatele pro kterého se mají inzeráty vyhledat
  * @param res Objekt sloužící k odeslání odpovědi na požadavek
  * */
 exports.GetAdvertisesFromUser = (userId, res) => {
