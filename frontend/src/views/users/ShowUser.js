@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {BASE_URL, AxiosConfig} from "../../components/AxiosConfig";
 import React, {useState} from 'react';
-import {Alert, Card} from 'react-bootstrap';
+import {Alert, Card, Form} from 'react-bootstrap';
 import {useParams} from "react-router";
 import {useCookies} from "react-cookie";
 import moment from "moment";
@@ -55,7 +55,7 @@ function ShowUser() {
         // dotaz na backend
         axios.get(BASE_URL + '/get-user', tempConfig).then(res => {
             // data neobsahují chyby
-            if(!Array.isArray(res.data)) {
+            if (!Array.isArray(res.data)) {
                 // nastavení dat
                 setUserData(res.data);
                 // pokud je uživatel přihlášen kontrola, zda se nejedná o profil přihlášeného uživatele
@@ -112,6 +112,17 @@ function ShowUser() {
         }
     }
 
+    function sortAdvertises(e) {
+        let value = Number(e.target.value);
+        let state = [...userAdvertises];
+        state.sort(function (a, b) {
+            return (value < 0)
+                ? (new Date(b.createdOn) - new Date(a.createdOn))
+                : (new Date(a.createdOn) - new Date(b.createdOn));
+        });
+        setUserAdvertises(state);
+    }
+
     // formátování datumu a času do čitelnější podoby
     function formatDate(date) {
         return moment(date).format("DD.MM.YYYY HH:mm:ss");
@@ -156,10 +167,16 @@ function ShowUser() {
                 </Card.Body>
             </Card>
             <Card>
-                <Card.Header as="h5">Inzeráty</Card.Header>
-                <Card.Body>
+                <Card.Header hidden={userAdvertises.length <= 0} as="h5">Inzeráty</Card.Header>
+                <Card.Header hidden={userAdvertises.length > 0} as="h5">Uživatel nemá žádné inzeráty</Card.Header>
+                <Form.Select hidden={userAdvertises.length <= 0} className="ms-auto"
+                             style={{width: 200}} onChange={sortAdvertises}>
+                    <option value="1">Od nejstarších</option>
+                    <option value="-1">Od nejnovějších</option>
+                </Form.Select>
+                <Card.Body id="advertises-list-user">
                     {/*Zobrazení inzerátů uživatele*/}
-                    {userAdvertises.map(advertise => {
+                    {userAdvertises && userAdvertises.map(advertise => {
                         return (
                             <Card key={advertise._id}>
                                 <Card.Body>
@@ -193,7 +210,8 @@ function ShowUser() {
                                         úprava: {formatDate(advertise.lastUpdate)}</Card.Footer>
                                 }
                             </Card>
-                        );})}
+                        );
+                    })}
                 </Card.Body>
             </Card>
         </div>
