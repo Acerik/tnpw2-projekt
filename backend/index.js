@@ -163,7 +163,7 @@ app.delete('/api/delete-advertise', (req, res) => {
 });
 // get pro získání stránky s inzeráty, lze vyhledávat a lze stránkovat
 app.get('/api/get-advertise-list', (req, res) => {
-    AdvertiseManagement.GetAdvertiseList(req.query.page, req.query.search, res);
+    AdvertiseManagement.GetAdvertiseList(req.query.page, req.query.search, req.query.sort, res);
 });
 // get pro získání uživatele pro zobrazení
 app.get('/api/get-user', (req, res) => {

@@ -22,8 +22,12 @@ function App() {
             <Routes> {/*Router pro cesty*/}
                 {/*Cesty přístupné pro všechny bez ohledu na přihlášeného uživvatele*/}
                 <Route path={'' || '/'} element={<ListAdvertises/>}/>
+                {/*Cesty s vyhledáváním inzerátů*/}
+                <Route path='/inzeraty/hledat/:search/:page/:sort' element={<ListAdvertises/>}/>
                 <Route path='/inzeraty/hledat/:search/:page' element={<ListAdvertises/>}/>
                 <Route path='/inzeraty/hledat/:search' element={<ListAdvertises/>}/>
+                {/*Cesty bez vyhledávání*/}
+                <Route path='/inzeraty/:page/:sort' element={<ListAdvertises/>}/>
                 <Route path='/inzeraty/:page' element={<ListAdvertises/>}/>
                 <Route path='/inzeraty/' element={<ListAdvertises/>}/>
 

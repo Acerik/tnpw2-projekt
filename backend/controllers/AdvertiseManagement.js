@@ -154,9 +154,12 @@ exports.GetAdvertisesFromUser = (userId, res) => {
  * Metoda slouží k návratu inzerátů do listu podle případně zadané stránky a hledaného textu
  * @param page Číslo stránky pro kterou se mají zobrazit inzeráty
  * @param search Text pro výhledávání inzerátů
+ * @param sort Číselná hodnota vyjadřující řazení inzerátů
  * @param res Objekt sloužící k odeslání odpovědi na požadavek
  * */
-exports.GetAdvertiseList = (page, search, res) => {
+exports.GetAdvertiseList = (page, search, sort, res) => {
+    // přídana kontrola zda je zadáno řazení inzerátů pokud ne zvolí se výchozí od nejstarších
+    sort = sort ? Number(sort) : defaultSortCreatedOn;
     // omezení počtu inzerátů na stránku, v konstantě z důvodu případné rozšířitelnosti na variabilní počet
     const perPage = 20;
     // kontrola zda byla stránka zadána případně vložena na výchozí hodnotu 1
@@ -169,7 +172,7 @@ exports.GetAdvertiseList = (page, search, res) => {
         // vyhledávání s využitím regexu z mongodb najde zadaný text v atributu name
         // není case sensitive a zahrne inzeráty kde je hledaný text pouze částí názvu
         AdvertiseModel.find({name: {"$regex": search, "$options":"i"}})
-            .sort({createdOn:defaultSortCreatedOn}).lean().then(searchedAdvertises=> {
+            .sort({createdOn:sort}).lean().then(searchedAdvertises=> {
             if(!searchedAdvertises || searchedAdvertises.length === 0){
                 // nebyl nalezen žádný inzerát
                 res.send(["Žádný inzerát obsahující v názvu: " + search + " nebyl nalezen."]);
@@ -198,7 +201,7 @@ exports.GetAdvertiseList = (page, search, res) => {
             // výpočet počtu inzerátů, které se mají přeskočit
             let skip = perPage * (page - 1);
             // vyhledání inzerátů s limitem podle počtu na stránku a přeskočením předchozích
-            AdvertiseModel.find().sort({createdOn: defaultSortCreatedOn}).skip(skip).limit(perPage).lean().then(advertises => {
+            AdvertiseModel.find().sort({createdOn: sort}).skip(skip).limit(perPage).lean().then(advertises => {
                 // odeslání inzerátů včetně stránky a maximální hodnoty pro číslo stránky
                 res.send({advertises, page, maxPage});
             }).catch(err => {
