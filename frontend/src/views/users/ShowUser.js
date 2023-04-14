@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {BASE_URL, AxiosConfig} from "../../components/AxiosConfig";
 import React, {useState} from 'react';
-import {Alert, Card, Form} from 'react-bootstrap';
+import {Alert, Button, Card, Form, Modal} from 'react-bootstrap';
 import {useParams} from "react-router";
 import {useCookies} from "react-cookie";
 import moment from "moment";
@@ -18,6 +18,20 @@ function ShowUser() {
     const [firstLoad, setFirstLoad] = useState(true);
     const [hiddenError, setHiddenError] = useState(true);
     const [hiddenSuccess, setHiddenSuccess] = useState(true);
+    const [modalInformation, setModalInformation] = useState({
+        show: false,
+        header: "",
+        responseText: "",
+        navigate: false
+    });
+    const [modalDeleteAdvertise, setModalDeleteAdvertise] = useState({
+        show: false,
+        data: {
+            _id: "",
+            text: "",
+            header: ""
+        }
+    });
     const [userData, setUserData] = useState({
         email: "",
         username: "",
@@ -61,8 +75,12 @@ function ShowUser() {
                 // pokud je uživatel přihlášen kontrola, zda se nejedná o profil přihlášeného uživatele
                 setMyProfile(cookies.userId === res.data._id);
             } else {
-                alert(res.data.join(" "));
-                navigate(-1);
+                setModalInformation({
+                    header: "Chyba",
+                    responseText: res.data.join(" "),
+                    navigate: -1,
+                    show: true
+                });
             }
         }).catch(err => {
             console.log(err);
@@ -81,45 +99,31 @@ function ShowUser() {
         let advertiseIdToDelete = e.target.attributes.advertiseid.value;
         // nalezení inzerátu ke smazání podle id
         let advertiseToDelete = userAdvertises.find(({_id}) => _id === advertiseIdToDelete);
-        // potvrzení zda se má inzerát smazat
-        if (window.confirm("Chcete smazat inzerát s názvem: " + advertiseToDelete.name)) {
-            // dočasné nastavení pro axios s id inzerátu, který se má smazat
-            let tempConfig = AxiosConfig;
-            tempConfig.params = {advertiseIdToDelete};
-            // dotaz na backend
-            axios.delete(BASE_URL + '/delete-advertise', tempConfig).then((res) => {
-                // pokud jsou obsaženy chyby dojde k jejich vypsání, které po 3s zmizí
-                if (Array.isArray(res.data)) {
-                    let element = document.getElementById("errors-p");
-                    element.innerHTML = res.data.join("<br>");
-                    setHiddenError(false);
-                    setTimeout(() => {
-                        setHiddenError(true);
-                    }, 3000);
-                } else {
-                    // zobrazení zprávy o úspěšném smazání inzerátu, zpráva po 3s zmizí
-                    let element = document.getElementById("success-p");
-                    element.innerHTML = res.data;
-                    setFirstLoad(true);
-                    setHiddenSuccess(false);
-                    setTimeout(() => {
-                        setHiddenSuccess(true);
-                    }, 3000);
-                }
-            }).catch(err => {
-                console.log(err);
-            });
-        }
+        // nastavení dat pro modal, který se zobrazí uživateli pro potvrzení smazání
+        setModalDeleteAdvertise({
+            show: true,
+            data: {
+                _id: advertiseIdToDelete,
+                text: "Opravdu chcete smazat inzerát s názvem: \"" + advertiseToDelete.name + "\". "
+                    + "Tento inzerát byl vytvořen: " + formatDate(advertiseToDelete.createdOn),
+                header: "Chcete smazat inzerát?"
+            }
+        });
     }
 
+    // řazení inzerátů na profilu
     function sortAdvertises(e) {
+        // získání hodnoty na řazení
         let value = Number(e.target.value);
+        // kopie inzerátů
         let state = [...userAdvertises];
+        // řazení inzerátů
         state.sort(function (a, b) {
             return (value < 0)
                 ? (new Date(b.createdOn) - new Date(a.createdOn))
                 : (new Date(a.createdOn) - new Date(b.createdOn));
         });
+        // uložení inzerátů
         setUserAdvertises(state);
     }
 
@@ -128,9 +132,77 @@ function ShowUser() {
         return moment(date).format("DD.MM.YYYY HH:mm:ss");
     }
 
+    function handleCloseModal() {
+        // resetování informací o inzerátu ke smazání
+        setModalDeleteAdvertise({
+            show: false,
+            data: {
+                _id: "",
+                text: "",
+                header: ""
+            }
+        });
+    }
+
+    function handleModalConfirm() {
+        // dočasné nastavení pro axios s id inzerátu, který se má smazat
+        let tempConfig = AxiosConfig;
+        tempConfig.params = {advertiseIdToDelete: modalDeleteAdvertise.data._id};
+        // dotaz na backend
+        axios.delete(BASE_URL + '/delete-advertise', tempConfig).then((res) => {
+            // pokud jsou obsaženy chyby dojde k jejich vypsání, které po 3s zmizí
+            if (Array.isArray(res.data)) {
+                let element = document.getElementById("errors-p");
+                element.innerHTML = res.data.join("<br>");
+                setHiddenError(false);
+                setTimeout(() => {
+                    setHiddenError(true);
+                }, 3000);
+            } else {
+                // zobrazení zprávy o úspěšném smazání inzerátu, zpráva po 3s zmizí
+                let element = document.getElementById("success-p");
+                element.innerHTML = res.data;
+                setFirstLoad(true);
+                setHiddenSuccess(false);
+                setTimeout(() => {
+                    setHiddenSuccess(true);
+                }, 3000);
+            }
+        }).catch(err => {
+            console.log(err);
+        });
+        // nastavení useState modal zpět do výchozího stavu
+        handleCloseModal();
+    }
+
+    // obsluha pro zavření informačního upozornění
+    function handleModalInformation(){
+        // navigace na předchozí stránky podle potřeby
+        if(modalInformation.navigate !== false) {
+            navigate(modalInformation.navigate);
+        }
+        setModalInformation({show: false, header: "", responseText: "", navigate: false});
+    }
+
     // vykreslení
     return (
         <div id='content'>
+            {/*Modals pro zobrazení dotazu na uživatele*/}
+            <Modal show={modalDeleteAdvertise.show} onHide={handleCloseModal} backdrop="static" keyboard={false}>
+                <Modal.Header closeButton>{modalDeleteAdvertise.data.header}</Modal.Header>
+                <Modal.Body>{modalDeleteAdvertise.data.text}</Modal.Body>
+                <Modal.Footer>
+                    <Button variant="danger" onClick={handleCloseModal}>Ne</Button>
+                    <Button variant="success" onClick={handleModalConfirm}>Ano</Button>
+                </Modal.Footer>
+            </Modal>
+            <Modal show={modalInformation.show} onHide={handleModalInformation}>
+                <Modal.Header closeButton>{modalInformation.header}</Modal.Header>
+                <Modal.Body>{modalInformation.responseText}</Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleModalInformation}>Zavřít</Button>
+                </Modal.Footer>
+            </Modal>
             {/*Místo pro zobrazení případných chyb*/}
             <Alert hidden={hiddenError} variant="danger" onClose={() => setHiddenError(true)} dismissible>
                 <Alert.Heading>Chyba</Alert.Heading>

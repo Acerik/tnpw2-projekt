@@ -13,4 +13,3 @@ export const AxiosConfig = {
         },
     withCredentials: true
 }
-//"Access-Control-Allow-Origin": "http://localhost:3000"

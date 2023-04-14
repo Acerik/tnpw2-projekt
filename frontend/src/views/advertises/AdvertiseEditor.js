@@ -230,13 +230,13 @@ function AdvertiseEditor() {
                 <p id="errors-p"> </p>
             </Alert>
             {/*Zobrazení úspěšných informací, příprava pro odpovědi*/}
-            <Alert hidden={hiddenSuccess} variant="success" onClose={()=> setHiddenSuccess(true)} dismissible delay={3000} autohide>
+            <Alert hidden={hiddenSuccess} variant="success" onClose={()=> setHiddenSuccess(true)} dismissible delay={3000} autohide={"true"}>
                 <Alert.Heading>Úspěch</Alert.Heading>
                 <p id="success-p"> </p>
             </Alert>
             {/*Formulář pro editaci inzerátu*/}
             <Form noValidate validated={validated} onSubmit={onSubmit}>
-                <Form.Group className="mb-3" controlId="formAdName">
+                <Form.Group className="mb-3">
                     <Form.Label>Název inzerátu:</Form.Label>
                     <Form.Control required autoComplete="off" value={advertiseState.name} placeholder="Název inzerátu"
                                   type="text" name="name" onChange={handleChange}/>
@@ -251,7 +251,7 @@ function AdvertiseEditor() {
                         </Form.Select>
                     </FormGroup>
                     <FormGroup as={Col}>
-                        <Form.Select aria-label="Cena inzerátu" name="priceType" onChange={priceTypeChange} controlId="priceType"
+                        <Form.Select aria-label="Cena inzerátu" name="priceType" onChange={priceTypeChange}
                                      disabled={formDisabledState.priceType} value={advertiseState.priceType}>
                             <option value="price">Zadaná cena</option>
                             <option value="free">Zdarma</option>

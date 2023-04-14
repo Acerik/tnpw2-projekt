@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {BASE_URL, AxiosConfig} from "../../components/AxiosConfig";
 import React, {useState} from 'react';
-import {Card} from 'react-bootstrap';
+import {Button, Card, Modal} from 'react-bootstrap';
 import {useParams} from "react-router";
 import moment from "moment";
 import {useCookies} from "react-cookie";
@@ -15,6 +15,20 @@ function ShowAdvertise() {
     const navigate = useNavigate();
     const priceTypes = {"free": "Zdarma", "offer": "Dohodou"};
     const advertiseTypes = {"buy": "Koupím", "sell": "Prodám"};
+    const [modalDeleteAdvertise, setModalDeleteAdvertise] = useState({
+        show: false,
+        data: {
+            _id: "",
+            text: "",
+            header: ""
+        }
+    });
+    const [modalInformation, setModalInformation] = useState({
+        show: false,
+        header: "",
+        responseText: "",
+        navigate: false
+    });
     const [advertiseData, setAdvertiseData] = useState({
         name: "",
         price: "",
@@ -44,8 +58,12 @@ function ShowAdvertise() {
             if(!Array.isArray(res.data)) {
                 setAdvertiseData(res.data);
             } else {
-                alert(res.data.join(" "));
-                navigate(-1);
+                setModalInformation({
+                    show: true,
+                    header: "Chyba",
+                    responseText: res.data.join(" "),
+                    navigate: -1
+                });
             }
         }).catch(err => {
             console.log(err);
@@ -58,31 +76,87 @@ function ShowAdvertise() {
     }
 
     // metoda pro smázání inzerátu, lze využít pouze pokud je přihlášený uživatel autorem inzerátu
+    // obsluha smazání inzerátu
     function deleteAdvertise() {
-        // potvrzení zda se má inzerát smazat
-        if (window.confirm("Chcete smazat tento inzerát?")) {
-            // vytvoření dočasného nastavení s id inzerátu, který se má smazat
-            let tempConfig = AxiosConfig;
-            tempConfig.params = {advertiseIdToDelete: advertiseId};
-            // volání na backend
-            axios.delete(BASE_URL + '/delete-advertise', tempConfig).then((res) => {
-                // zobrazení výsledku
-                if (Array.isArray(res.data)) {
-                    alert("Chyba. " + res.data.join(". "));
-                } else {
-                    alert("Úspěch. " + res.data + " Dojde k přesměrování na předchozí stránku.");
-                    // návrat na předchozí stránky (-2, protože -1 se vrátí na stav před smazání (#smazat-inzerát))
-                    navigate(-2);
-                }
-            }).catch(err => {
-                console.log(err);
-            });
+        // nastavení dat pro modal, který se zobrazí uživateli pro potvrzení smazání
+        setModalDeleteAdvertise({
+            show: true,
+            data: {
+                _id: advertiseId,
+                text: "Opravdu chcete smazat inzerát s názvem: \"" + advertiseData.name + "\". "
+                    + "Tento inzerát byl vytvořen: " + formatDate(advertiseData.createdOn),
+                header: "Chcete smazat inzerát?"
+            }
+        });
+    }
+    function handleCloseModal() {
+        // resetování informací o inzerátu ke smazání
+        setModalDeleteAdvertise({
+            show: false,
+            data: {
+                _id: "",
+                text: "",
+                header: ""
+            }
+        });
+    }
+
+    function handleModalConfirm() {
+        // dočasné nastavení pro axios s id inzerátu, který se má smazat
+        let tempConfig = AxiosConfig;
+        tempConfig.params = {advertiseIdToDelete: modalDeleteAdvertise.data._id};
+        // dotaz na backend
+        axios.delete(BASE_URL + '/delete-advertise', tempConfig).then((res) => {
+            if (Array.isArray(res.data)) {
+                setModalInformation({
+                    show: true,
+                    header: "Došlo k chybě.",
+                    responseText: res.data.join(' '),
+                    navigate: -2
+                });
+            } else {
+                setModalInformation({
+                    show: true,
+                    header: "Úspěch.",
+                    responseText: res.data,
+                    navigate: -2
+                });
+            }
+        }).catch(err => {
+            console.log(err);
+        });
+        // nastavení useState modal zpět do výchozího stavu
+        handleCloseModal();
+    }
+
+    // obsluha pro zavření informačního upozornění
+    function handleModalInformation(){
+        // navigace na předchozí stránky podle potřeby
+        if(modalInformation.navigate !== false) {
+            navigate(modalInformation.navigate);
         }
+        setModalInformation({show: false, header: "", responseText: "", navigate: false});
     }
 
     // vykreslení
     return (
         <div id='content'>
+            {/*Modals pro zobrazení dotazu na uživatele*/}
+            <Modal show={modalDeleteAdvertise.show} onHide={handleCloseModal} backdrop="static" keyboard={false}>
+                <Modal.Header closeButton>{modalDeleteAdvertise.data.header}</Modal.Header>
+                <Modal.Body>{modalDeleteAdvertise.data.text}</Modal.Body>
+                <Modal.Footer>
+                    <Button variant="danger" onClick={handleCloseModal}>Ne</Button>
+                    <Button variant="success" onClick={handleModalConfirm}>Ano</Button>
+                </Modal.Footer>
+            </Modal>
+            <Modal show={modalInformation.show} onHide={handleModalInformation}>
+                <Modal.Header closeButton>{modalInformation.header}</Modal.Header>
+                <Modal.Body>{modalInformation.responseText}</Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleModalInformation}>Zavřít</Button>
+                </Modal.Footer>
+            </Modal>
             {/*Zobrazení všech informací o inzerátu*/}
             <Card>
                 <Card.Header as="h5">{advertiseTypes[advertiseData.type]}</Card.Header>
@@ -102,7 +176,7 @@ function ShowAdvertise() {
                             <br/> <br/>
                             <Card.Subtitle>Jste autorem inzerátu.</Card.Subtitle>
                             <Card.Link href={'/upravit-inzerat/' + advertiseId}>Upravit inzerát</Card.Link>
-                            <Card.Link href='#smazat-inzerat' onClick={deleteAdvertise}>Smazat inzerát</Card.Link>
+                            <Card.Link href="#smazat-inzerat" onClick={deleteAdvertise}>Smazat inzerát</Card.Link>
                         </>
                         : ""}
                 </Card.Body>

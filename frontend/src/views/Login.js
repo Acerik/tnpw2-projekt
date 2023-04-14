@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {BASE_URL, AxiosConfig} from "../components/AxiosConfig";
 import React, {useState} from 'react';
-import {Form, Button, Alert} from 'react-bootstrap';
+import {Form, Button, Alert, Stack} from 'react-bootstrap';
 import {useNavigate} from "react-router-dom";
 import {useCookies} from "react-cookie";
 
@@ -52,6 +52,7 @@ function Login() {
             </Alert>
             {/*Formulář*/}
             <Form onSubmit={onSubmit}>
+                <Stack gap={2} className="col-md-5 mx-auto">
                 {/*Zadání emailu*/}
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Email:</Form.Label>
@@ -69,6 +70,7 @@ function Login() {
                                   })}/>
                 </Form.Group>
                 <Button variant="primary" type="submit" onClick={onSubmit}>Přihlásit</Button>
+                </Stack>
             </Form>
         </div>
     );
